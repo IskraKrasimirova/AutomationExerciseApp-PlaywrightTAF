@@ -1,23 +1,27 @@
 ﻿using Microsoft.Playwright;
 
-namespace AutomationApp.UiTests.Hooks
+namespace AutomationApp.UiTests.Tests
 {
     public class BaseTest
     {
         protected IPage Page = null!;
-        private PlaywrightFixture _fixture = null!;
+        private IPlaywright _playwright = null!;
+        private IBrowser _browser = null!;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
-            _fixture = new PlaywrightFixture();
-            await _fixture.InitializeAsync();
+            _playwright = await Playwright.CreateAsync();
+            _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            {
+                Headless = false
+            });
         }
 
         [SetUp]
         public async Task SetUp()
         {
-            Page = await _fixture.Browser.NewPageAsync();
+            Page = await _browser.NewPageAsync();
         }
 
         [TearDown]
@@ -29,7 +33,8 @@ namespace AutomationApp.UiTests.Hooks
         [OneTimeTearDown]
         public async Task OneTimeTearDown()
         {
-            await _fixture.DisposeAsync();
+            await _browser.DisposeAsync();
+            _playwright.Dispose();
         }
     }
 }
