@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36930.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationAppPlaywrightTAF", "AutomationAppPlaywrightTAF\AutomationAppPlaywrightTAF.csproj", "{207C3AA6-0EA5-55D6-F1D0-87745A337ED3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationApp.UiTests", "AutomationAppPlaywrightTAF\AutomationApp.UiTests.csproj", "{207C3AA6-0EA5-55D6-F1D0-87745A337ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
