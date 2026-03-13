@@ -13,7 +13,7 @@ namespace AutomationApp.UiTests.Utilities
 
         private ConfigurationSettings()
         {
-            var environment = Environment.GetEnvironmentVariable("environment", EnvironmentVariableTarget.User);
+            var environment = Environment.GetEnvironmentVariable("environment");
             var configurationFileName = string.IsNullOrEmpty(environment)
                 ? "appsettings.json"
                 : $"appsettings.{environment}.json";

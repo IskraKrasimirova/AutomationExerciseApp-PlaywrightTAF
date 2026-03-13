@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -14,20 +15,29 @@ namespace AutomationApp.UiTests.Tests
             _playwright = await Playwright.CreateAsync();
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = false
+                Headless = false,
+                Args = ["--start-maximized"]
             });
         }
 
         [SetUp]
         public async Task SetUp()
         {
-            Page = await _browser.NewPageAsync();
+            var context = await _browser.NewContextAsync(new BrowserNewContextOptions
+            {
+                BaseURL = ConfigurationSettings.Instance.SettingsModel.BaseUrl,
+                ViewportSize = ViewportSize.NoViewport
+            });
+
+            context.SetDefaultTimeout(10000);
+
+            Page = await context.NewPageAsync();
         }
 
         [TearDown]
         public async Task TearDown()
         {
-            await Page.CloseAsync();
+            await Page.Context.CloseAsync();
         }
 
         [OneTimeTearDown]
