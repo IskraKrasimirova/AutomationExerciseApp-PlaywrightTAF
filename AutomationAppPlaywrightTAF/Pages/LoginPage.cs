@@ -16,6 +16,8 @@ namespace AutomationApp.UiTests.Pages
         private ILocator NameInput => SignupForm.GetByPlaceholder("Name");
         private ILocator SignupEmailInput => SignupForm.GetByPlaceholder("Email Address");
         private ILocator SignupButton => SignupForm.GetByRole(AriaRole.Button, new() { Name = "Signup" });
+        private ILocator ExistingEmailErrorMessage => SignupForm.GetByText("Email Address already exist!");
+        private ILocator InvalidCredentialsErrorMessage => LoginForm.GetByText("Your email or password is incorrect!");
 
         public LoginPage(IPage page) : base(page)
         {
@@ -52,6 +54,16 @@ namespace AutomationApp.UiTests.Pages
             await Expect(SignupHeader).ToBeVisibleAsync();
             //await VerifyLoginFormIsDisplayed();
             //await VerifySignupFormIsDisplayed();
+        }
+
+        public async Task VerifyEmailAlreadyExistsError()
+        {
+            await Expect(ExistingEmailErrorMessage).ToBeVisibleAsync();
+        }
+
+        public async Task VerifyInvalidCredentialsError()
+        {
+            await Expect(InvalidCredentialsErrorMessage).ToBeVisibleAsync();
         }
     }
 }

@@ -39,6 +39,8 @@ namespace AutomationApp.UiTests.Pages
         public async Task Logout() => await LogoutLink.ClickAsync();
         public async Task DeleteAccount() => await DeleteAccountLink.ClickAsync();
 
+        public async Task<bool> IsUserLoggedIn() => await LogoutLink.IsVisibleAsync();
+
         public async Task VerifyUserIsLoggedIn(string name)
         {
             await Expect(LogoutLink).ToBeVisibleAsync();
