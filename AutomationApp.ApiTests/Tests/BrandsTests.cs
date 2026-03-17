@@ -49,7 +49,7 @@ namespace AutomationApp.ApiTests.Tests
         public async Task PutToAllBrands_Returns405InResponseBody()
         {
             var request = new RestRequest(ApiConstants.BrandsListEndpoint);
-            var response = await Client.ExecutePutAsync<ErrorResponse>(request);
+            var response = await Client.ExecutePutAsync<ApiResponse>(request);
 
             AssertStatusCode(response, HttpStatusCode.OK);
             response.Data.Should().NotBeNull();

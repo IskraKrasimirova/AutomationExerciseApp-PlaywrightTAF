@@ -31,7 +31,7 @@ namespace AutomationApp.ApiTests.Tests
         public async Task SearchProduct_WithoutSearchTerm_Returns400InResponseBody()
         {
             var request = new RestRequest(ApiConstants.SearchProductEndpoint);
-            var response = await Client.ExecutePostAsync<ErrorResponse>(request);
+            var response = await Client.ExecutePostAsync<ApiResponse>(request);
 
             AssertStatusCode(response, HttpStatusCode.OK);
             response.Data.Should().NotBeNull();

@@ -55,7 +55,7 @@ namespace AutomationApp.ApiTests.Tests
         public async Task PostToAllProducts_Returns405InResponseBody()
         {
             var request = new RestRequest(ApiConstants.ProductsListEndpoint);
-            var response = await Client.ExecutePostAsync<ErrorResponse>(request);
+            var response = await Client.ExecutePostAsync<ApiResponse>(request);
 
             AssertStatusCode(response, HttpStatusCode.OK);
             response.Data.Should().NotBeNull();

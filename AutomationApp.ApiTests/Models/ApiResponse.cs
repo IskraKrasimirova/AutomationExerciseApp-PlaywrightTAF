@@ -2,7 +2,7 @@
 
 namespace AutomationApp.ApiTests.Models
 {
-    public class ErrorResponse
+    public class ApiResponse
     {
         [JsonProperty("responseCode")]
         public int ResponseCode { get; set; }
