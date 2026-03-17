@@ -1,4 +1,4 @@
-﻿using AutomationApp.UiTests.Utilities;
+﻿using AutomationApp.Common.Utilities;
 using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests

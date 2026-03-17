@@ -1,7 +1,7 @@
-﻿using AutomationApp.UiTests.Models;
+﻿using AutomationApp.Common.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace AutomationApp.UiTests.Utilities
+namespace AutomationApp.Common.Utilities
 {
     public class ConfigurationSettings
     {

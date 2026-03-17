@@ -1,4 +1,4 @@
-﻿namespace AutomationApp.UiTests.Models
+﻿namespace AutomationApp.Common.Models
 {
     public class SettingsModel
     {
