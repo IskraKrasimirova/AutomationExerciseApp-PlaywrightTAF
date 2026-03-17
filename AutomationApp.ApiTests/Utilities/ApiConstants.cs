@@ -3,5 +3,6 @@
     public class ApiConstants
     {
         public const string ProductsListEndpoint = "productsList";
+        public const string BrandsListEndpoint = "brandsList";
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutomationApp.Common.Utilities;
 using FluentAssertions;
 using RestSharp;
+using RestSharp.Serializers.NewtonsoftJson;
 using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
@@ -13,7 +14,7 @@ namespace AutomationApp.ApiTests.Tests
         public void OneTimeSetUp()
         {
             var options = new RestClientOptions(ConfigurationSettings.Instance.SettingsModel.ApiBaseUrl);
-            Client = new RestClient(options);
+            Client = new RestClient(options, configureSerialization: s => s.UseNewtonsoftJson());
         }
 
         [OneTimeTearDown]

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AutomationApp.ApiTests.Models
+namespace AutomationApp.ApiTests.Models.Products
 {
     public class UserTypeModel
     {

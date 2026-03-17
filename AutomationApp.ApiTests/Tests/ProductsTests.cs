@@ -3,6 +3,7 @@ using FluentAssertions;
 using RestSharp;
 using System.Net;
 using AutomationApp.ApiTests.Utilities;
+using AutomationApp.ApiTests.Models.Products;
 
 namespace AutomationApp.ApiTests.Tests
 {
