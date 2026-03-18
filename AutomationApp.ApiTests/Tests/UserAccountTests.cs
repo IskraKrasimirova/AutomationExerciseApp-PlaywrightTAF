@@ -7,7 +7,6 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using RestSharp;
 using System.Net;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace AutomationApp.ApiTests.Tests
 {
@@ -141,14 +140,7 @@ namespace AutomationApp.ApiTests.Tests
             response.Data.Message.Should().Be("User created!");
 
             // Clean up - delete the created user
-            try
-            {
-                await _userApiHelper.DeleteUserAsync(newUser.Email, newUser.Password);
-            }
-            catch (Exception ex)
-            {
-                TestContext.Out.WriteLine($"Cleanup failed: {ex.Message}");
-            }
+            await _userApiHelper.DeleteUserAsync(newUser.Email, newUser.Password);
         }
 
         [Test, Ignore("deleteAccount endpoint does not work outside Postman.")]
