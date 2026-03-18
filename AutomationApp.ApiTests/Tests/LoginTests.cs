@@ -8,6 +8,7 @@ using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
 {
+    [Category("LoginApi")]
     public class LoginTests : BaseTest
     {
         private UserModel _testUser;

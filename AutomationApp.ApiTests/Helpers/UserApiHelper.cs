@@ -50,10 +50,13 @@ namespace AutomationApp.ApiTests.Helpers
 
         public async Task DeleteUserAsync(string email, string password)
         {
-            var request = new RestRequest(ApiConstants.DeleteAccountEndpoint);
+            var request = new RestRequest(ApiConstants.DeleteAccountEndpoint, Method.Post);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("_method", "DELETE");
             request.AddParameter("email", email);
             request.AddParameter("password", password);
-            var response = await _client.ExecuteDeleteAsync<ApiResponse>(request);
+
+            var response = await _client.ExecuteAsync<ApiResponse>(request);
 
             if (response.Data?.ResponseCode != 200)
             {
