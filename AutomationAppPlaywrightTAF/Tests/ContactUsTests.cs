@@ -32,5 +32,17 @@ namespace AutomationApp.UiTests.Tests
             await _contactUsPage.GoToHomePge();
             await _homePage.VerifyIsAtHomePage();
         }
+
+        [Test]
+        [Category("Smoke")]
+        public async Task SubmitContactUsForm_WithValidDataAndUploadFile_RedirectsToHomePage()
+        {
+            var contactData = ContactFormFactory.CreateDefault();
+
+            await _contactUsPage.SubmitContactForm(contactData);
+            await _contactUsPage.VerifySuccessMessage();
+            await _contactUsPage.GoToHomePge();
+            await _homePage.VerifyIsAtHomePage();
+        }
     }
 }

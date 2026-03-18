@@ -18,7 +18,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator FileUploadInput => ContactUsForm.Locator("input[type='file']");
         private ILocator SubmitButton => ContactUsForm.GetByText("Submit");
         private ILocator SuccessMessage => _page.Locator(".contact-form").GetByText("Success! Your details have been submitted successfully.");
-        private ILocator HomeButton => _page.Locator(".contact-form").GetByRole(AriaRole.Link, new() { Name = "Home" });
+        private ILocator HomeButton => _page.Locator("#form-section").GetByRole(AriaRole.Link, new() { Name = "Home" });
 
         public ContactUsPage(IPage page) : base(page)
         {
@@ -26,6 +26,9 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task SubmitContactForm(ContactFormModel form)
         {
+            _page.Dialog += async (_, dialog) => await dialog.AcceptAsync();
+
+            await NameInput.WaitForAsync();
             await NameInput.FillAsync(form.Name);
             await EmailInput.FillAsync(form.Email);
             await SubjectInput.FillAsync(form.Subject);
@@ -36,7 +39,6 @@ namespace AutomationApp.UiTests.Pages
                 await FileUploadInput.SetInputFilesAsync(form.FilePath);
             }
 
-            _page.Dialog += async (_, dialog) => await dialog.AcceptAsync();
             await SubmitButton.ClickAsync();
         }
 

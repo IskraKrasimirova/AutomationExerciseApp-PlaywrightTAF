@@ -29,6 +29,24 @@ namespace AutomationApp.UiTests.Tests
                 ViewportSize = ViewportSize.NoViewport
             });
 
+            await context.RouteAsync("**/*", async route =>
+            {
+                var url = route.Request.Url;
+                if (route.Request.ResourceType == "script" && (
+                    url.Contains("googlesyndication") ||
+                    url.Contains("doubleclick.net") ||
+                    url.Contains("googleadservices") ||
+                    url.Contains("adnxs.com") ||
+                    url.Contains("amazon-adsystem")))
+                {
+                    await route.AbortAsync();
+                }
+                else
+                {
+                    await route.ContinueAsync();
+                }
+            });
+
             context.SetDefaultTimeout(10000);
 
             Page = await context.NewPageAsync();
