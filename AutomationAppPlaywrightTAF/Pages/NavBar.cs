@@ -18,7 +18,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator LoginLink => _page.GetByRole(AriaRole.Link, new() { Name = "Signup / Login" });
         private ILocator TestCasesLink => _page.GetByRole(AriaRole.Link, new() { Name = "Test Cases" });
         private ILocator ApiTestingLink => _page.GetByRole(AriaRole.Link, new() { Name = "API Testing" });
-        private ILocator ContactsLink => _page.GetByRole(AriaRole.Link, new() { Name = "Contact us" });
+        private ILocator ContactUsLink => _page.GetByRole(AriaRole.Link, new() { Name = "Contact us" });
 
         // The "Video Tutorials" link opens a youtube page in a new tab, which is not handled in the current test suite, so it's commented out for now. It can be implemented in the future if needed.
         // private ILocator VideoTutorialsLink => _page.GetByRole(AriaRole.Link, new() { Name = "Video Tutorials" });
@@ -33,7 +33,7 @@ namespace AutomationApp.UiTests.Pages
         public async Task GoToLoginPage() => await LoginLink.ClickAsync();
         public async Task GoToTestCasesPage() => await TestCasesLink.ClickAsync();
         public async Task GoToApiTestingPage() => await ApiTestingLink.ClickAsync();
-        public async Task GoToContactsPage() => await ContactsLink.ClickAsync();
+        public async Task GoToContactUsPage() => await ContactUsLink.ClickAsync();
         public async Task GoToHomePage() => await HomeLink.ClickAsync();
 
         public async Task Logout() => await LogoutLink.ClickAsync();
