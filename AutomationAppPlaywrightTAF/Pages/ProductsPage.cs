@@ -20,8 +20,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator SearchedProductsHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Searched Products" });
         private ILocator ProductItems => ProductsList.Locator(".product-image-wrapper");
         private ILocator ProductItem(int index) => ProductItems.Nth(index);
-        private ILocator AddToCartButtonForProduct(int index) => ProductItem(index).Locator("a.add-to-cart");
-
+        private ILocator AddToCartButtonForProduct(int index) => ProductItem(index).Locator(".product-overlay a.add-to-cart");
         private ILocator ProductInfo(int index) => ProductItem(index).Locator(".productinfo.text-center");
 
         
