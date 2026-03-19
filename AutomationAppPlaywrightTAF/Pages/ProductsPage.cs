@@ -16,21 +16,26 @@ namespace AutomationApp.UiTests.Pages
         private ILocator SaleImage => _page.Locator("#sale_image");
 
         private ILocator FirstProductViewButton => ProductsList.Locator(".product-image-wrapper").First.GetByRole(AriaRole.Link, new() { Name = "View Product" });
-        private ILocator FirstProductInfo => ProductsList.Locator(".product-image-wrapper").First.Locator(".productinfo.text-center");
-        private ILocator FirstProductName => FirstProductInfo.Locator("p");
-        private ILocator FirstProductPrice => FirstProductInfo.Locator("h2");
-        private ILocator FirstProductImage => FirstProductInfo.Locator("img");
 
         private ILocator SearchedProductsHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Searched Products" });
         private ILocator ProductItems => ProductsList.Locator(".product-image-wrapper");
+        private ILocator ProductItem(int index) => ProductItems.Nth(index);
+        private ILocator AddToCartButtonForProduct(int index) => ProductItem(index).Locator("a.add-to-cart");
 
+        private ILocator ProductInfo(int index) => ProductItem(index).Locator(".productinfo.text-center");
+
+        
         public ProductsPage(IPage page) : base(page)
         {
         }
 
-        public async Task<string> GetFirstProductName() => await FirstProductName.InnerTextAsync();
-        public async Task<string> GetFirstProductPrice() => await FirstProductPrice.InnerTextAsync();
-        public async Task<string?> GetFirstProductImageSrc() => await FirstProductImage.GetAttributeAsync("src");
+        public async Task<string> GetProductName(int index) => await ProductInfo(index).Locator("p").InnerTextAsync();
+        public async Task<string> GetProductPrice(int index) => await ProductInfo(index).Locator("h2").InnerTextAsync();
+        private async Task<string?> GetProductImage(int index) => await ProductInfo(index).Locator("img").GetAttributeAsync("src");
+
+        public async Task<string> GetFirstProductName() => await GetProductName(0);
+        public async Task<string> GetFirstProductPrice() => await GetProductPrice(0);
+        public async Task<string?> GetFirstProductImageSrc() => await GetProductImage(0);
 
         public async Task ClickViewFirstProduct()
         {
@@ -41,6 +46,13 @@ namespace AutomationApp.UiTests.Pages
         {
             await SearchProductInput.FillAsync(searchTerm);
             await SearchButton.ClickAsync();
+        }
+
+        public async Task HoverAndAddToCart(int productIndex)
+        {
+            var product = ProductItem(productIndex);
+            await product.HoverAsync();
+            await AddToCartButtonForProduct(productIndex).ClickAsync();
         }
 
         public async Task VerifyIsAtProductsPage()
