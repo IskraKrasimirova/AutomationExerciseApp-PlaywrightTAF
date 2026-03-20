@@ -35,6 +35,11 @@ namespace AutomationApp.UiTests.Pages
             await ProceedToCheckoutButton.ClickAsync();
         }
 
+        public async Task RemoveProduct(int rowIndex)
+        {
+            await DeleteProductButton(rowIndex).ClickAsync();
+        }
+
         public async Task VerifyIsAtCartPage()
         {
             await Expect(_page).ToHaveURLAsync("/view_cart");
