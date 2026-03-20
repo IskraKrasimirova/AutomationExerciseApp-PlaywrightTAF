@@ -30,6 +30,11 @@ namespace AutomationApp.UiTests.Pages
             await LinkToProductsPage.ClickAsync();
         }
 
+        public async Task ProceedToCheckout()
+        {
+            await ProceedToCheckoutButton.ClickAsync();
+        }
+
         public async Task VerifyIsAtCartPage()
         {
             await Expect(_page).ToHaveURLAsync("/view_cart");

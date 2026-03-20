@@ -29,6 +29,17 @@ namespace AutomationApp.UiTests.Pages
         {
         }
 
+        public async Task SetQuantity(int quantity)
+        {
+            await QuantityInput.ClearAsync();
+            await QuantityInput.FillAsync(quantity.ToString());
+        }
+
+        public async Task AddToCart()
+        {
+            await AddToCartButton.ClickAsync();
+        }
+
         public async Task VerifyIsAtProductDetailsPage()
         {
             await Expect(_page).ToHaveURLAsync(new Regex("/product_details/\\d+"));

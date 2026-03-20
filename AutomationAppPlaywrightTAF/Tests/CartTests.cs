@@ -1,9 +1,4 @@
 ﻿using AutomationApp.UiTests.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -11,6 +6,7 @@ namespace AutomationApp.UiTests.Tests
     {
         private HomePage _homePage;
         private ProductsPage _productsPage;
+        private ProductDetailsPage _productDetailsPage;
         private CartModal _cartModal;
         private CartPage _cartPage;
 
@@ -19,6 +15,7 @@ namespace AutomationApp.UiTests.Tests
         {
             _homePage = new HomePage(Page);
             _productsPage = new ProductsPage(Page);
+            _productDetailsPage = new ProductDetailsPage(Page);
             _cartModal = new CartModal(Page);
             _cartPage = new CartPage(Page);
 
@@ -65,6 +62,34 @@ namespace AutomationApp.UiTests.Tests
             await _cartPage.VerifyCartIsEmpty();
             await _cartPage.NavigateToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
+        }
+
+        [Test]
+        public async Task AddProductToCart_WithCustomQuantity_ShowsCorrectQuantityAndTotalPriceInCart()
+        {
+            await _homePage.VerifyIsAtHomePage();
+            await _homePage.NavBar.GoToProductsPage();
+            await _productsPage.VerifyIsAtProductsPage();
+
+            var firstProductName = await _productsPage.GetFirstProductName();
+            var firstProductPrice = await _productsPage.GetFirstProductPrice();
+
+            await _productsPage.ClickViewFirstProduct();
+            await _productDetailsPage.VerifyIsAtProductDetailsPage();
+
+            var quantity = new Random().Next(2, 10);
+            await _productDetailsPage.SetQuantity(quantity);
+            await _productDetailsPage.AddToCart();
+
+            await _cartModal.VerifyIsVisible();
+            await _cartModal.ViewCart();
+            await _cartPage.VerifyIsAtCartPage();
+            await _cartPage.VerifyProductsCount(1);
+
+            var singlePrice = decimal.Parse(firstProductPrice.Replace("Rs.", "").Trim());
+            var expectedTotalPrice = $"Rs. {singlePrice * quantity}";
+
+            await _cartPage.VerifyProductInCart(0, firstProductName, firstProductPrice, quantity.ToString(), expectedTotalPrice);
         }
     }
 }
