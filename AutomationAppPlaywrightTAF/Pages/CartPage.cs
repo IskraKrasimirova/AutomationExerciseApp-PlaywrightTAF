@@ -10,8 +10,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator ShoppingCartBreadcrumb => CartSection.GetByText("Shopping Cart");
         private ILocator CartTable => CartSection.Locator("#cart_info_table");
         private ILocator CartRows => CartTable.Locator("tbody tr");
-        private ILocator ProceedToCheckoutButton => CartSection.GetByRole(AriaRole.Link, new() { Name = "Proceed To Checkout" });
-
+        private ILocator ProceedToCheckoutButton => _page.Locator("a.check_out");
         private ILocator ProductRow(int index) => CartRows.Nth(index);
         private ILocator ProductName(int index) => ProductRow(index).Locator(".cart_description h4");
         private ILocator ProductPrice(int index) => ProductRow(index).Locator(".cart_price p");
