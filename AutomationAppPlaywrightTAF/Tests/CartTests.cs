@@ -91,5 +91,26 @@ namespace AutomationApp.UiTests.Tests
 
             await _cartPage.VerifyProductInCart(0, firstProductName, firstProductPrice, quantity.ToString(), expectedTotalPrice);
         }
+
+        [Test]
+        public async Task RemovingProductFromCart_LeavesCartEmpty()
+        {
+            await _homePage.VerifyIsAtHomePage();
+            await _homePage.NavBar.GoToProductsPage();
+            await _productsPage.VerifyIsAtProductsPage();
+
+            var firstProductName = await _productsPage.GetFirstProductName();
+            var firstProductPrice = await _productsPage.GetFirstProductPrice();
+
+            await _productsPage.HoverAndAddToCart(0);
+            await _cartModal.VerifyIsVisible();
+            await _cartModal.ViewCart();
+            await _cartPage.VerifyIsAtCartPage();
+            await _cartPage.VerifyProductsCount(1);
+            await _cartPage.VerifyProductInCart(0, firstProductName, firstProductPrice, "1", firstProductPrice);
+
+            await _cartPage.RemoveProduct(0);
+            await _cartPage.VerifyCartIsEmpty();
+        }
     }
 }
