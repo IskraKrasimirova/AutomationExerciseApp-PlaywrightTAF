@@ -1,10 +1,5 @@
 ﻿using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -44,8 +39,8 @@ namespace AutomationApp.UiTests.Tests
         }
 
         [Test]
-        [Category("Smoke")]
-        public async Task PlaceOrder_RegisterWhileCheckout_OrderPlacedSuccessfully()
+        [Category("E2E")]
+        public async Task RegisterDuringCheckout_PlacesOrderSuccessfully()
         {
             // Add product to cart
             await _homePage.VerifyIsAtHomePage();
@@ -80,6 +75,7 @@ namespace AutomationApp.UiTests.Tests
             // Go back to cart and checkout
             await _homePage.NavBar.GoToCartPage();
             await _cartPage.VerifyIsAtCartPage();
+            await _cartPage.VerifyProductsCount(1);
             await _cartPage.ProceedToCheckout();
             await _checkoutPage.VerifyIsAtCheckoutPage();
             await _checkoutPage.EnterComment("Test order comment");
@@ -88,8 +84,7 @@ namespace AutomationApp.UiTests.Tests
             // Payment
             var paymentDetails = PaymentFactory.CreateDefault();
             await _paymentPage.VerifyIsAtPaymentPage();
-            await _paymentPage.EnterPaymentDetails(paymentDetails);
-            await _paymentPage.ConfirmPayment();
+            await _paymentPage.EnterPaymentDetailsAndConfirm(paymentDetails);
 
             // Confirm order
             await _orderConfirmationPage.VerifyIsAtOrderConfirmationPage();

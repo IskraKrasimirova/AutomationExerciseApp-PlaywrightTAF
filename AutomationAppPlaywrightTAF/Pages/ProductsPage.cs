@@ -49,6 +49,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task HoverAndAddToCart(int productIndex)
         {
+            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             var product = ProductItem(productIndex);
             await product.HoverAsync();
             await AddToCartButtonForProduct(productIndex).ClickAsync();

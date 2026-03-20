@@ -7,7 +7,7 @@ namespace AutomationApp.UiTests.Pages
     public class PaymentPage : BasePage
     {
         private ILocator PaymentHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Payment" });
-        private ILocator PaymentForm => _page.Locator("#payment-form");
+        private ILocator PaymentForm => _page.Locator(".payment-information");
         private ILocator NameOnCardInput => PaymentForm.Locator("[data-qa='name-on-card']");
         private ILocator CardNumberInput => PaymentForm.Locator("[data-qa='card-number']");
         private ILocator CvcInput => PaymentForm.Locator("[data-qa='cvc']");
@@ -20,17 +20,15 @@ namespace AutomationApp.UiTests.Pages
         {
         }
 
-        public async Task EnterPaymentDetails(PaymentModel payment)
+        public async Task EnterPaymentDetailsAndConfirm(PaymentModel payment)
         {
+            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await NameOnCardInput.FillAsync(payment.NameOnCard);
             await CardNumberInput.FillAsync(payment.CardNumber);
             await CvcInput.FillAsync(payment.Cvc);
             await ExpirationMonthInput.FillAsync(payment.ExpirationMonth);
             await ExpirationYearInput.FillAsync(payment.ExpirationYear);
-        }
 
-        public async Task ConfirmPayment()
-        {
             await PayAndConfirmButton.ClickAsync();
         }
 

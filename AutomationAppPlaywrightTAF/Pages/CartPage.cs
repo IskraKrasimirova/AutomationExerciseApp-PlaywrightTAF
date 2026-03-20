@@ -10,7 +10,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator ShoppingCartBreadcrumb => CartSection.GetByText("Shopping Cart");
         private ILocator CartTable => CartSection.Locator("#cart_info_table");
         private ILocator CartRows => CartTable.Locator("tbody tr");
-        private ILocator ProceedToCheckoutButton => _page.Locator("a.check_out");
+        private ILocator ProceedToCheckoutButton => _page.Locator("#do_action a.check_out");
         private ILocator ProductRow(int index) => CartRows.Nth(index);
         private ILocator ProductName(int index) => ProductRow(index).Locator(".cart_description h4");
         private ILocator ProductPrice(int index) => ProductRow(index).Locator(".cart_price p");
@@ -31,6 +31,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task ProceedToCheckout()
         {
+            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await ProceedToCheckoutButton.ClickAsync();
         }
 

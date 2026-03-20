@@ -6,7 +6,7 @@ namespace AutomationApp.UiTests.Pages
     public class HomePage: BasePage
     {
         private ILocator LogoImage => _page.GetByAltText("Website for automation practice");
-        private ILocator Header => _page.GetByRole(AriaRole.Heading, new() { Name = "Full-Fledged practice website for Automation Engineers" });
+        private ILocator Header => _page.Locator("#slider-carousel .item.active h2");
         private ILocator ConsentButton => _page.GetByRole(AriaRole.Button, new() { Name = "Consent" });
 
         public HomePage(IPage page) : base(page) 
