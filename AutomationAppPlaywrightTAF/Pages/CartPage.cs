@@ -19,6 +19,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator DeleteProductButton(int index) => ProductRow(index).Locator(".cart_delete a");
         private ILocator EmptyCartMessage => CartSection.Locator("#empty_cart");
         private ILocator LinkToProductsPage => CartSection.GetByRole(AriaRole.Link, new() { Name = "here" });
+        private ILocator ProductByName(string productName) => CartRows.Locator(".cart_description h4", new() { HasText = productName });
 
         public CartPage(IPage page) : base(page)
         {
@@ -65,6 +66,11 @@ namespace AutomationApp.UiTests.Pages
         {
             await Expect(EmptyCartMessage).ToBeVisibleAsync();
             await Expect(CartTable).ToBeHiddenAsync();
+        }
+
+        public async Task VerifyProductNotInCart(string productName)
+        {
+            await Expect(ProductByName(productName)).ToHaveCountAsync(0);
         }
     }
 }

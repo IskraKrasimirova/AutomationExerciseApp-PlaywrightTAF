@@ -112,5 +112,36 @@ namespace AutomationApp.UiTests.Tests
             await _cartPage.RemoveProduct(0);
             await _cartPage.VerifyCartIsEmpty();
         }
+
+        [Test]
+        public async Task RemovingOneProductFromCart_OtherProductsRemainInCart()
+        {
+            await _homePage.VerifyIsAtHomePage();
+            await _homePage.NavBar.GoToProductsPage();
+            await _productsPage.VerifyIsAtProductsPage();
+
+            var firstProductName = await _productsPage.GetFirstProductName();
+            var firstProductPrice = await _productsPage.GetFirstProductPrice();
+            var secondProductName = await _productsPage.GetProductName(1);
+            var secondProductPrice = await _productsPage.GetProductPrice(1);
+
+            await _productsPage.HoverAndAddToCart(0);
+            await _cartModal.VerifyIsVisible();
+            await _cartModal.ContinueShopping();
+
+            await _productsPage.HoverAndAddToCart(1);
+            await _cartModal.VerifyIsVisible();
+            await _cartModal.ViewCart();
+
+            await _cartPage.VerifyIsAtCartPage();
+            await _cartPage.VerifyProductsCount(2);
+            await _cartPage.VerifyProductInCart(0, firstProductName, firstProductPrice, "1", firstProductPrice);
+            await _cartPage.VerifyProductInCart(1, secondProductName, secondProductPrice, "1", secondProductPrice);
+
+            await _cartPage.RemoveProduct(0);
+            await _cartPage.VerifyProductsCount(1);
+            await _cartPage.VerifyProductNotInCart(firstProductName);
+            await _cartPage.VerifyProductInCart(0, secondProductName, secondProductPrice, "1", secondProductPrice);
+        }
     }
 }
