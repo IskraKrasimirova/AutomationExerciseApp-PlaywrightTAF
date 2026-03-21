@@ -22,16 +22,16 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        public async Task BrowsingCategoryProducts_ShowsCorrectProductsForEachCategory()
+        public async Task NavigatingBetweenCategories_DisplaysCorrectCategoryPage()
         {
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
 
-            await _productsPage.Sidebar.ExpandAndClickWomenSubCategory("Tops");
+            await _productsPage.Sidebar.ExpandAndClickSubCategory("Women", "Tops");
             await _categoryProductsPage.VerifyIsAtCategoryPage("Women", "Tops");
 
-            await _categoryProductsPage.Sidebar.ExpandAndClickMenSubCategory("Tshirts");
+            await _categoryProductsPage.Sidebar.ExpandAndClickSubCategory("Men", "Tshirts");
             await _categoryProductsPage.VerifyIsAtCategoryPage("Men", "Tshirts");
         }
     }

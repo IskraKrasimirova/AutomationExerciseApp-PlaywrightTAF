@@ -9,7 +9,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator CategoryHeader => _page.Locator(".features_items h2.title");
         private ILocator ProductsList => _page.Locator(".features_items");
         private ILocator ProductItems => ProductsList.Locator(".product-image-wrapper");
-        private ILocator ProductLink => _page.Locator(".breadcrumbs").GetByRole(AriaRole.Link);
+        private ILocator ProductsLink => _page.Locator(".breadcrumbs").GetByRole(AriaRole.Link);
         private ILocator CategoryBreadcrumbText => _page.Locator(".breadcrumbs li.active");
         public Sidebar Sidebar { get; }
 
@@ -25,7 +25,7 @@ namespace AutomationApp.UiTests.Pages
             await Expect(_page).ToHaveURLAsync(new Regex("/category_products/\\d+"));
             await Expect(CategoryHeader).ToContainTextAsync(expectedHeader, new() { IgnoreCase = true });
             await Expect(ProductsList).ToBeVisibleAsync();
-            await Expect(ProductLink).ToBeVisibleAsync();
+            await Expect(ProductsLink).ToBeVisibleAsync();
             await Expect(CategoryBreadcrumbText).ToContainTextAsync(expectedBreadcrumbText, new() { IgnoreCase = true });
             var productsCount = await ProductItems.CountAsync();
             Assert.That(productsCount, Is.GreaterThan(0), $"Expected at least 1 product in {expectedCategory} - {expectedSubCategory}");
