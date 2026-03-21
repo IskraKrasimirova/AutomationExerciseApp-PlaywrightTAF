@@ -22,10 +22,11 @@ namespace AutomationApp.UiTests.Pages
         private ILocator ProductItem(int index) => ProductItems.Nth(index);
         private ILocator AddToCartButtonForProduct(int index) => ProductItem(index).Locator(".product-overlay a.add-to-cart");
         private ILocator ProductInfo(int index) => ProductItem(index).Locator(".productinfo.text-center");
+        public Sidebar Sidebar { get; }
 
-        
         public ProductsPage(IPage page) : base(page)
         {
+            Sidebar = new Sidebar(page);
         }
 
         public async Task<string> GetProductName(int index) => await ProductInfo(index).Locator("p").InnerTextAsync();
