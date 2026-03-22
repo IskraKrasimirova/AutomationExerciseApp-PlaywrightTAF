@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -26,7 +27,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtOrderConfirmationPage()
         {
-            await Expect(_page).ToHaveURLAsync(new System.Text.RegularExpressions.Regex("/payment_done/\\d+"));
+            await Expect(_page).ToHaveURLAsync(new System.Text.RegularExpressions.Regex($"{UiConstants.OrderConfirmationUrl}\\d+"));
             await Expect(OrderHeader).ToBeVisibleAsync();
             await Expect(ConfirmationMessage).ToBeVisibleAsync();
             await Expect(DownloadInvoiceButton).ToBeVisibleAsync();

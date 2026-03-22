@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -17,7 +18,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyAccountDeleted()
         {
-            await Expect(_page).ToHaveURLAsync("/delete_account");
+            await Expect(_page).ToHaveURLAsync(UiConstants.AccountDeletedUrl);
             await Expect(AccountDeletedHeader).ToBeVisibleAsync();
             await Expect(DeletingMessage).ToBeVisibleAsync();
             await Expect(ContinueButton).ToBeVisibleAsync();

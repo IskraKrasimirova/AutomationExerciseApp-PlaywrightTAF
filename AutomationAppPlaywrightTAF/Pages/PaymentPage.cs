@@ -1,4 +1,5 @@
 ﻿using AutomationApp.UiTests.Models;
+using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
@@ -34,7 +35,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtPaymentPage()
         {
-            await Expect(_page).ToHaveURLAsync("/payment");
+            await Expect(_page).ToHaveURLAsync(UiConstants.PaymentUrl);
             await Expect(PaymentHeader).ToBeVisibleAsync();
             await Expect(PaymentForm).ToBeVisibleAsync();
         }

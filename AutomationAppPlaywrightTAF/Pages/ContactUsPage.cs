@@ -1,4 +1,5 @@
 ﻿using AutomationApp.UiTests.Models;
+using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
@@ -28,6 +29,7 @@ namespace AutomationApp.UiTests.Pages
         {
             _page.Dialog += async (_, dialog) => await dialog.AcceptAsync();
 
+            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await NameInput.WaitForAsync();
             await NameInput.FillAsync(form.Name);
             await EmailInput.FillAsync(form.Email);
@@ -49,7 +51,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtContactUsPage()
         {
-            await Expect(_page).ToHaveURLAsync("/contact_us");
+            await Expect(_page).ToHaveURLAsync(UiConstants.ContactUsUrl);
             await Expect(ContactUsForm).ToBeVisibleAsync();
             await Expect(ContactUsHeader).ToBeVisibleAsync();
             await Expect(GetInTouchHeader).ToBeVisibleAsync();

@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using System.Text.RegularExpressions;
 using static Microsoft.Playwright.Assertions;
 
@@ -22,7 +23,7 @@ namespace AutomationApp.UiTests.Pages
         {
             var expectedHeader = $"{expectedCategory} - {expectedSubCategory} Products";
             var expectedBreadcrumbText = $"{expectedCategory} > {expectedSubCategory}";
-            await Expect(_page).ToHaveURLAsync(new Regex("/category_products/\\d+"));
+            await Expect(_page).ToHaveURLAsync(new Regex($"{UiConstants.CategoryProductsUrl}\\d+"));
             await Expect(CategoryHeader).ToContainTextAsync(expectedHeader, new() { IgnoreCase = true });
             await Expect(ProductsList).ToBeVisibleAsync();
             await Expect(ProductsLink).ToBeVisibleAsync();

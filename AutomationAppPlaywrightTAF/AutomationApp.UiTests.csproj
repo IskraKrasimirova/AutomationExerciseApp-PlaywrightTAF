@@ -42,10 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AutomationApp.Common\AutomationApp.Common.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using System.Text.RegularExpressions;
 using static Microsoft.Playwright.Assertions;
 
@@ -42,7 +43,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtProductDetailsPage()
         {
-            await Expect(_page).ToHaveURLAsync(new Regex("/product_details/\\d+"));
+            await Expect(_page).ToHaveURLAsync(new Regex($"{UiConstants.ProductDetailsUrl}\\d+"));
             await VerifyProductDetailsAreVisible();
             await VerifyProductReviewFormIsVisible();
         }

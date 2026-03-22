@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -32,28 +33,17 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task Signup(string name, string email)
         {
+            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await NameInput.FillAsync(name);
             await SignupEmailInput.FillAsync(email);
             await SignupButton.ClickAsync();
         }
 
-        public async Task VerifyLoginFormIsDisplayed()
-        {
-            await Expect(LoginForm).ToBeVisibleAsync();
-        }
-
-        public async Task VerifySignupFormIsDisplayed()
-        {
-            await Expect(SignupForm).ToBeVisibleAsync();
-        }
-
         public async Task VerifyIsAtLoginPage()
         {
-            await Expect(_page).ToHaveURLAsync("/login");
+            await Expect(_page).ToHaveURLAsync(UiConstants.LoginUrl);
             await Expect(LoginHeader).ToBeVisibleAsync();
             await Expect(SignupHeader).ToBeVisibleAsync();
-            //await VerifyLoginFormIsDisplayed();
-            //await VerifySignupFormIsDisplayed();
         }
 
         public async Task VerifyEmailAlreadyExistsError()

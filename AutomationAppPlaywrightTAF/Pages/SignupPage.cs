@@ -1,4 +1,5 @@
 ﻿using AutomationApp.UiTests.Models;
+using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
@@ -72,8 +73,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtSignupPage(string name, string email)
         {
-            await Expect(_page).ToHaveURLAsync("/signup");
-            //await Expect(AccountInfoForm).ToBeVisibleAsync();
+            await Expect(_page).ToHaveURLAsync(UiConstants.SignupUrl);
             await Expect(AccountInfoHeader).ToBeVisibleAsync();
             await Expect(AddressInfoHeader).ToBeVisibleAsync();
             await Expect(NameInput).ToHaveValueAsync(name);

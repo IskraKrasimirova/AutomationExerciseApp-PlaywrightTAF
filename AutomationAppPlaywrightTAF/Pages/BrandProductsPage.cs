@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using System.Text.RegularExpressions;
 using static Microsoft.Playwright.Assertions;
 
@@ -20,7 +21,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtBrandPage(string brandName, int expectedCount)
         {
-            await Expect(_page).ToHaveURLAsync(new Regex($"/brand_products/", RegexOptions.IgnoreCase));
+            await Expect(_page).ToHaveURLAsync(new Regex($"{UiConstants.BrandProductsUrl}", RegexOptions.IgnoreCase));
             await Expect(BrandHeader).ToContainTextAsync($"Brand - {brandName} Products", new() { IgnoreCase = true });
             await Expect(ProductsList).ToBeVisibleAsync();
             await Expect(ProductsLink).ToBeVisibleAsync();

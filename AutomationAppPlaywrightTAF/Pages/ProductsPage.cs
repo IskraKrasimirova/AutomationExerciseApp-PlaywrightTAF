@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using System.Text.RegularExpressions;
 using static Microsoft.Playwright.Assertions;
 
@@ -44,6 +45,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task SearchProduct(string searchTerm)
         {
+            //await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await SearchProductInput.FillAsync(searchTerm);
             await SearchButton.ClickAsync();
         }
@@ -71,7 +73,7 @@ namespace AutomationApp.UiTests.Pages
         public async Task VerifySearchResultsAreDisplayed(string searchTerm)
         {
             var encodedSearchTerm = Uri.EscapeDataString(searchTerm);
-            await Expect(_page).ToHaveURLAsync(new Regex($"products\\?search={encodedSearchTerm}"));
+            await Expect(_page).ToHaveURLAsync(new Regex($"{UiConstants.ProductsUrl}\\?search={encodedSearchTerm}"));
             await Expect(SearchedProductsHeader).ToBeVisibleAsync();
             await Expect(ProductsList).ToBeVisibleAsync();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.Common.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -23,7 +24,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtHomePage()
         {
-            await Expect(_page).ToHaveURLAsync("/");
+            await Expect(_page).ToHaveURLAsync(ConfigurationSettings.Instance.SettingsModel.BaseUrl);
             await Expect(LogoImage).ToBeVisibleAsync();
             await Expect(Header).ToContainTextAsync("Full-Fledged practice website for Automation Engineers");
         }

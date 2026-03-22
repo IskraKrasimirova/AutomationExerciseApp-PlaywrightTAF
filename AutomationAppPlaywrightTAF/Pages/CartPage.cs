@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -38,12 +39,13 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task RemoveProduct(int rowIndex)
         {
+            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await DeleteProductButton(rowIndex).ClickAsync();
         }
 
         public async Task VerifyIsAtCartPage()
         {
-            await Expect(_page).ToHaveURLAsync("/view_cart");
+            await Expect(_page).ToHaveURLAsync(UiConstants.CartUrl);
             await Expect(HomeLink).ToBeVisibleAsync();
             await Expect(ShoppingCartBreadcrumb).ToBeVisibleAsync();
         }

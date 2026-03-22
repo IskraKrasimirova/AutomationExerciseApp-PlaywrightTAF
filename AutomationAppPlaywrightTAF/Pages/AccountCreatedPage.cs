@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -17,7 +18,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyAccountCreated()
         {
-            await Expect(_page).ToHaveURLAsync("/account_created");
+            await Expect(_page).ToHaveURLAsync(UiConstants.AccountCreatedUrl);
             await Expect(AccountCreatedHeader).ToBeVisibleAsync();
             await Expect(GreetingMessage).ToBeVisibleAsync();
             await Expect(ContinueButton).ToBeVisibleAsync();

@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using AutomationApp.UiTests.Utilities;
+using Microsoft.Playwright;
 using static Microsoft.Playwright.Assertions;
 
 namespace AutomationApp.UiTests.Pages
@@ -29,7 +30,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task VerifyIsAtCheckoutPage()
         {
-            await Expect(_page).ToHaveURLAsync("/checkout");
+            await Expect(_page).ToHaveURLAsync(UiConstants.CheckoutUrl);
             await Expect(AddressDetailsHeader).ToBeVisibleAsync();
             await Expect(DeliveryAddressHeader).ToBeVisibleAsync();
             await Expect(BillingAddressHeader).ToBeVisibleAsync();
