@@ -19,78 +19,22 @@ A test automation framework built with C# for UI and API testing of the [Automat
 
 ## Project Structure
 ```
-AutomationAppPlaywrightTAF/
-├── AutomationApp.Common/
-│   ├── Models/
-│   │   └── SettingsModel.cs
-│   └── Utilities/
-│       └── ConfigurationSettings.cs
+    AutomationAppPlaywrightTAF/
+├── AutomationApp.Common/          # Shared configuration and utilities
 │
-├── AutomationApp.ApiTests/
-│   ├── Helpers/
-│   │   └── UserApiHelper.cs
-│   ├── Models/
-│   │   ├── Brands/
-│   │   ├── Products/
-│   │   └── Users/
-│   │       ├── Factories/
-│   │       ├── UserDetailModel.cs
-│   │       ├── UserDetailResponse.cs
-│   │       └── UserModel.cs
-│   │   └── ApiResponse.cs
-│   ├── Tests/
-│   │   ├── BaseTest.cs
-│   │   ├── BrandsTests.cs
-│   │   ├── LoginTests.cs
-│   │   ├── ProductsTests.cs
-│   │   ├── SearchProductTests.cs
-│   │   └── UserAccountTests.cs
-│   └── Utilities/
-│       └── ApiConstants.cs
+├── AutomationApp.ApiTests/        # API test project (RestSharp)
+│   ├── Helpers/                   # API helper classes
+│   ├── Models/                    # Request/response models and factories
+│   ├── Tests/                     # Test classes
+│   └── Utilities/                 # Constants and shared utilities
+│       
 │
-└── AutomationApp.UiTests/
-    ├── Models/
-    │   ├── Factories/
-    │   │   ├── ContactFormFactory.cs
-    │   │   ├── PaymentFactory.cs
-    │   │   └── UserFactory.cs
-    │   ├── ContactFormModel.cs
-    │   ├── PaymentModel.cs
-    │   ├── ProductData.cs
-    │   └── UserModel.cs
-    ├── Pages/
-    │   ├── AccountCreatedPage.cs
-    │   ├── AccountDeletedPage.cs
-    │   ├── BasePage.cs
-    │   ├── BrandProductsPage.cs
-    │   ├── CartModal.cs
-    │   ├── CartPage.cs
-    │   ├── CategoryProductsPage.cs
-    │   ├── CheckoutModal.cs
-    │   ├── CheckoutPage.cs
-    │   ├── ContactUsPage.cs
-    │   ├── HomePage.cs
-    │   ├── LoginPage.cs
-    │   ├── NavBar.cs
-    │   ├── OrderConfirmationPage.cs
-    │   ├── PaymentPage.cs
-    │   ├── ProductDetailsPage.cs
-    │   ├── ProductsPage.cs
-    │   ├── Sidebar.cs
-    │   └── SignupPage.cs
-    ├── TestData/
-    │   └── test-file.txt
-    ├── Tests/
-    │   ├── BaseTest.cs
-    │   ├── BrandTests.cs
-    │   ├── CartTests.cs
-    │   ├── CategoryTests.cs
-    │   ├── ContactUsTests.cs
-    │   ├── LoginTests.cs
-    │   ├── OrderTests.cs
-    │   ├── ProductsTests.cs
-    │   └── RegisterTests.cs
-    └── appsettings.json
+└── AutomationApp.UiTests/         # UI test project (Playwright)
+├── Models/                    # Test data models and factories
+├── Pages/                     # Page Object classes
+├── TestData/                  # Static test files
+├── Tests/                     # Test classes
+└── Utilities/                 # Constants and shared utilities
 ```
 
 ---
