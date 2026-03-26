@@ -21,8 +21,6 @@ namespace AutomationApp.UiTests.Tests
                 Headless = isCi,
                 Args = isCi ? [] : ["--start-maximized"]
             });
-
-            AllureLifecycle.Instance.CleanupResultDirectory();
         }
 
         [SetUp]

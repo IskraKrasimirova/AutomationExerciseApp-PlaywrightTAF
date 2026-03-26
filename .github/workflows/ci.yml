@@ -28,6 +28,12 @@ jobs:
     - name: Build solution
       run: dotnet build --configuration Release
 
+    - name: Clean Allure results (API)
+      run: rm -rf AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/* || true
+
+    - name: Clean Allure results (UI)
+      run: rm -rf AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* || true
+      
     # -------------------------
     # API TESTS
     # -------------------------
