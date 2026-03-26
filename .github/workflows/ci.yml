@@ -31,14 +31,47 @@ jobs:
     - name: Install Playwright browsers
       run: playwright install --with-deps
 
+    # -------------------------
+    # API TESTS
+    # -------------------------
     - name: Run API tests
-      run: dotnet test AutomationApp.ApiTests/AutomationApp.ApiTests.csproj --logger "trx;LogFileName=api-tests.trx"
+      run: dotnet test AutomationApp.ApiTests/AutomationApp.ApiTests.csproj \
+            --logger "trx;LogFileName=api-tests.trx" \
+            --logger "html;logfilename=api-report.html"
 
-    - name: Run UI tests
-      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests.trx"
-
-    - name: Upload test results
+    - name: Upload API TRX results
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-results
-        path: "**/*.trx"
+        name: api-test-results-trx
+        path: "**/api-tests.trx"
+
+    - name: Upload API HTML report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: api-test-results-html
+        path: "**/api-report.html"
+
+    # -------------------------
+    # UI TESTS 
+    # -------------------------
+    - name: Run UI tests
+      if: always()
+      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj \
+            --logger "trx;LogFileName=ui-tests.trx" \
+            --logger "html;logfilename=ui-report.html"
+
+    - name: Upload UI TRX results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ui-test-results-trx
+        path: "**/ui-tests.trx"
+
+    - name: Upload UI HTML report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ui-test-results-html
+        path: "**/ui-report.html"
