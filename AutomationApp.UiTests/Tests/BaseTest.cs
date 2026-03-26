@@ -12,10 +12,12 @@ namespace AutomationApp.UiTests.Tests
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
+            var isCi = Environment.GetEnvironmentVariable("CI") == "true";
+
             _playwright = await Playwright.CreateAsync();
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = false,
+                Headless = isCi,
                 Args = ["--start-maximized"]
             });
         }
