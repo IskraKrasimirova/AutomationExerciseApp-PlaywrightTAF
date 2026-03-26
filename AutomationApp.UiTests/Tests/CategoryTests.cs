@@ -1,8 +1,10 @@
-﻿using Allure.NUnit.Attributes;
+﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Pages;
 
 namespace AutomationApp.UiTests.Tests
 {
+    [AllureNUnit]
     [AllureSuite("UI Tests")]
     [AllureSubSuite("Category")]
     [Category("CategoryProducts")]

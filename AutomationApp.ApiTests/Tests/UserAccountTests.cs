@@ -1,4 +1,5 @@
-﻿using Allure.NUnit.Attributes;
+﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.ApiTests.Helpers;
 using AutomationApp.ApiTests.Models;
 using AutomationApp.ApiTests.Models.Users;
@@ -11,6 +12,7 @@ using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
 {
+    [AllureNUnit]
     [AllureSuite("API Tests")]
     [AllureSubSuite("UserAccount")]
     [Category("UserAccountApi")]

@@ -1,4 +1,5 @@
-﻿using Allure.NUnit.Attributes;
+﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.ApiTests.Models;
 using AutomationApp.ApiTests.Models.Brands;
 using AutomationApp.ApiTests.Utilities;
@@ -8,6 +9,7 @@ using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
 {
+    [AllureNUnit]
     [AllureSuite("API Tests")]
     [AllureSubSuite("Brands")]
     [Category("BrandsApi")]
