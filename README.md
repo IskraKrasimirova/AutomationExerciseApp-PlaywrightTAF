@@ -1,5 +1,7 @@
 ﻿# AutomationApp Test Framework
 
+![CI Pipeline](https://github.com/IskraKrasimirova/AutomationExerciseApp-PlaywrightTAF/actions/workflows/ci.yml/badge.svg)
+
 A test automation framework built with C# for UI and API testing of the [AutomationExercise](https://automationexercise.com) e-commerce practice website.
 
 ---
