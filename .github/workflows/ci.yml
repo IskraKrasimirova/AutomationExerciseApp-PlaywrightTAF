@@ -22,8 +22,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
+    - name: Install Playwright CLI
+      run: dotnet tool install --global Microsoft.Playwright.CLI
+
     - name: Install Playwright browsers
-      run: pwsh ./AutomationApp.UiTests/bin/Debug/net8.0/playwright.ps1 install
+      run: playwright install --with-deps
 
     - name: Run API tests
       run: dotnet test AutomationApp.ApiTests/AutomationApp.ApiTests.csproj --logger "trx;LogFileName=api-tests.trx"
@@ -36,4 +39,3 @@ jobs:
       with:
         name: test-results
         path: "**/*.trx"
-
