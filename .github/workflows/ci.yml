@@ -35,39 +35,32 @@ jobs:
     # API TESTS
     # -------------------------
     - name: Run API tests
-      run: dotnet test AutomationApp.ApiTests/AutomationApp.ApiTests.csproj --logger "trx;LogFileName=api-tests.trx" --logger "html;logfilename=api-report.html"
-
-    - name: Upload API TRX results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: api-test-results-trx
-        path: "**/api-tests.trx"
-
-    - name: Upload API HTML report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: api-test-results-html
-        path: "**/api-report.html"
+      run: dotnet test AutomationApp.ApiTests/AutomationApp.ApiTests.csproj --logger "trx;LogFileName=api-tests.trx"
 
     # -------------------------
-    # UI TESTS 
+    # UI TESTS (always run)
     # -------------------------
     - name: Run UI tests
       if: always()
-      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests.trx" --logger "html;logfilename=ui-report.html"
+      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests.trx"
 
-    - name: Upload UI TRX results
+    # -------------------------
+    # Generate Allure Report
+    # -------------------------
+    - name: Install Allure CLI
+      if: always()
+      run: |
+        sudo apt-add-repository ppa:qameta/allure -y
+        sudo apt-get update
+        sudo apt-get install allure -y
+
+    - name: Generate Allure HTML report
+      if: always()
+      run: allure generate --clean
+
+    - name: Upload Allure Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: ui-test-results-trx
-        path: "**/ui-tests.trx"
-
-    - name: Upload UI HTML report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: ui-test-results-html
-        path: "**/ui-report.html"
+        name: allure-report
+        path: allure-report

@@ -1,12 +1,15 @@
-﻿using AutomationApp.ApiTests.Models;
+﻿using Allure.NUnit.Attributes;
+using AutomationApp.ApiTests.Models;
+using AutomationApp.ApiTests.Models.Products;
+using AutomationApp.ApiTests.Utilities;
 using FluentAssertions;
 using RestSharp;
 using System.Net;
-using AutomationApp.ApiTests.Utilities;
-using AutomationApp.ApiTests.Models.Products;
 
 namespace AutomationApp.ApiTests.Tests
 {
+    [AllureSuite("API Tests")]
+    [AllureSubSuite("Products")]
     [Category("ProductsApi")]
     public class ProductsTests : BaseTest
     {

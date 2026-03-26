@@ -1,8 +1,11 @@
-﻿using AutomationApp.UiTests.Models.Factories;
+﻿using Allure.NUnit.Attributes;
+using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
 
 namespace AutomationApp.UiTests.Tests
 {
+    [AllureSuite("UI Tests")]
+    [AllureSubSuite("ContactUs")]
     [Category("ContactUs")]
     public class ContactUsTests : BaseTest
     {

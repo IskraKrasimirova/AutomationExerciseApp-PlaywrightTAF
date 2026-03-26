@@ -1,7 +1,11 @@
-﻿using AutomationApp.UiTests.Pages;
+﻿using Allure.NUnit.Attributes;
+using AutomationApp.UiTests.Pages;
 
 namespace AutomationApp.UiTests.Tests
 {
+    [AllureSuite("UI Tests")]
+    [AllureSubSuite("Cart")]
+    [Category("Cart")]
     public class CartTests : BaseTest
     {
         private HomePage _homePage;

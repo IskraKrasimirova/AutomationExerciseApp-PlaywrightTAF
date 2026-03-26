@@ -1,4 +1,5 @@
-﻿using AutomationApp.ApiTests.Helpers;
+﻿using Allure.NUnit.Attributes;
+using AutomationApp.ApiTests.Helpers;
 using AutomationApp.ApiTests.Models;
 using AutomationApp.ApiTests.Models.Users;
 using AutomationApp.ApiTests.Utilities;
@@ -8,6 +9,8 @@ using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
 {
+    [AllureSuite("API Tests")]
+    [AllureSubSuite("Login")]
     [Category("LoginApi")]
     public class LoginTests : BaseTest
     {

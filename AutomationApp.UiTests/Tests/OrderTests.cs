@@ -1,8 +1,13 @@
-﻿using AutomationApp.UiTests.Models.Factories;
+﻿using Allure.NUnit.Attributes;
+using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
 
 namespace AutomationApp.UiTests.Tests
 {
+
+    [AllureSuite("UI Tests")]
+    [AllureSubSuite("Order")]
+    [Category("Order")]
     public class OrderTests : BaseTest
     {
         private HomePage _homePage;

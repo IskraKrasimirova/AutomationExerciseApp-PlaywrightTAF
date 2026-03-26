@@ -1,4 +1,5 @@
-﻿using AutomationApp.ApiTests.Models;
+﻿using Allure.NUnit.Attributes;
+using AutomationApp.ApiTests.Models;
 using AutomationApp.ApiTests.Models.Products;
 using AutomationApp.ApiTests.Utilities;
 using FluentAssertions;
@@ -7,6 +8,8 @@ using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
 {
+    [AllureSuite("API Tests")]
+    [AllureSubSuite("SearchProduct")]
     [Category("SearchProductApi")]
     public class SearchProductTests: BaseTest
     {
