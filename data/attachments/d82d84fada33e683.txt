@@ -1,0 +1,1 @@
+[WARN] DeleteUserAsync failed (known issue). ResponseCode: 0, Message: 
