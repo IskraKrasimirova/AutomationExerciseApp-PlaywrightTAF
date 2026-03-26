@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: mcr.microsoft.com/playwright:v1.44.0-jammy
+      image: mcr.microsoft.com/playwright:v1.58.0-jammy
 
     steps:
     - name: Checkout repository
@@ -71,6 +71,12 @@ jobs:
         mkdir merged-results
         cp -r AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/* merged-results/ || true
         cp -r AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* merged-results/ || true
+
+    - name: Install Java
+      if: always()
+      run: |
+        apt-get update
+        apt-get install -y default-jre
 
     - name: Generate Allure HTML report
       if: always()
