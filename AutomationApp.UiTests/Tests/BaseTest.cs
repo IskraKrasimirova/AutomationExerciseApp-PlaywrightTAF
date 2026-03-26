@@ -1,4 +1,5 @@
-﻿using AutomationApp.Common.Utilities;
+﻿using Allure.Net.Commons;
+using AutomationApp.Common.Utilities;
 using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
@@ -18,8 +19,10 @@ namespace AutomationApp.UiTests.Tests
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
                 Headless = isCi,
-                Args = ["--start-maximized"]
+                Args = isCi ? [] : ["--start-maximized"]
             });
+
+            AllureLifecycle.Instance.CleanupResultDirectory();
         }
 
         [SetUp]

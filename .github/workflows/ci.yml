@@ -69,8 +69,8 @@ jobs:
       if: always()
       run: |
         mkdir merged-results
-        cp -r AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/* merged-results/ || true
-        cp -r AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* merged-results/ || true
+        cp -a AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/. merged-results/ || true
+        cp -a AutomationApp.UiTests/bin/Debug/net8.0/allure-results/. merged-results/ || true
 
     - name: Install Java
       if: always()
