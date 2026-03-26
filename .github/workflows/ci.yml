@@ -29,7 +29,7 @@ jobs:
       run: dotnet tool install --global Microsoft.Playwright.CLI
 
     - name: Install Playwright browsers
-      run: playwright install --with-deps
+      uses: microsoft/playwright-github-action@v1
 
     # -------------------------
     # API TESTS
@@ -45,15 +45,39 @@ jobs:
       run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests.trx"
 
     # -------------------------
+    # Collect Allure Results
+    # -------------------------
+    - name: Upload Allure Results (API)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results-api
+        path: AutomationApp.ApiTests/bin/Debug/net8.0/allure-results
+
+    - name: Upload Allure Results (UI)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results-ui
+        path: AutomationApp.UiTests/bin/Debug/net8.0/allure-results
+
+    # -------------------------
     # Generate Allure Report
     # -------------------------
     - name: Install Allure CLI
       if: always()
       run: npm install -g allure-commandline --save-dev
 
+    - name: Merge Allure Results
+      if: always()
+      run: |
+        mkdir merged-results
+        cp -r AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/* merged-results/ || true
+        cp -r AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* merged-results/ || true
+
     - name: Generate Allure HTML report
       if: always()
-      run: allure generate --clean
+      run: allure generate merged-results -o allure-report --clean
 
     - name: Upload Allure Report
       if: always()
@@ -61,3 +85,4 @@ jobs:
       with:
         name: allure-report
         path: allure-report
+
