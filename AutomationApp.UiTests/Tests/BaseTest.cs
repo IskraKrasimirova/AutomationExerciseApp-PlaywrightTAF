@@ -82,14 +82,16 @@ namespace AutomationApp.UiTests.Tests
 
             AllureLifecycle.Instance.UpdateTestCase(x =>
             {
-                x.labels.RemoveAll(l => l.name == "suite" || l.name == "parentSuite");
+                x.labels.RemoveAll(l => l.name == "suite" || l.name == "parentSuite" || l.name == "subSuite");
 
                 x.labels.Add(new Label { name = "parentSuite", value = "UI Tests" });
                 x.labels.Add(new Label { name = "suite", value = _browserName });
+                x.labels.Add(new Label { name = "subSuite", value = GetType().Name });
 
                 x.labels.RemoveAll(l => l.name == "layer");
                 x.labels.Add(new Label { name = "layer", value = "ui" });
             });
+
         }
 
         [TearDown]
