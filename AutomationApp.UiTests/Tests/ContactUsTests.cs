@@ -2,6 +2,7 @@
 using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
+using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -29,6 +30,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task SubmitContactUsForm_WithValidData_RedirectsToHomePage()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             var contactData = ContactFormFactory.CreateDefault();
             contactData.FilePath = null;
 
@@ -42,6 +45,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task SubmitContactUsForm_WithValidDataAndUploadFile_RedirectsToHomePage()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             var contactData = ContactFormFactory.CreateDefault();
 
             await _contactUsPage.SubmitContactForm(contactData);

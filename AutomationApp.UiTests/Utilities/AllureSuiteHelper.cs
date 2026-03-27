@@ -1,17 +1,13 @@
 ﻿using Allure.Net.Commons;
-using NUnit.Framework.Interfaces;
 
 namespace AutomationApp.UiTests.Utilities
 {
-    public class AllureBrowserSuiteAttribute: TestActionAttribute
+    public class AllureSuiteHelper
     {
-        public override void BeforeTest(ITest test)
+        public static void ApplySuiteLabels()
         {
-            if (test.IsSuite)
-                return;
-
             var browser = Environment.GetEnvironmentVariable("BROWSER") ?? UiConstants.BrowserChromium;
-            var className = test.ClassName?.Split('.').Last() ?? "UnknownClass";
+            var className = TestContext.CurrentContext.Test.ClassName?.Split('.').Last() ?? "UnknownClass";
 
             AllureLifecycle.Instance.UpdateTestCase(x =>
             {
@@ -26,7 +22,5 @@ namespace AutomationApp.UiTests.Utilities
                 x.labels.Add(Label.SubSuite(className));
             });
         }
-
-        public override ActionTargets Targets => ActionTargets.Test;
     }
 }
