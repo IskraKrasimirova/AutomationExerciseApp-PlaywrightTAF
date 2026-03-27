@@ -4,6 +4,7 @@ using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
 {
+    [AllureBrowserSuite]
     public class BaseTest
     {
         protected IPage Page = null!;

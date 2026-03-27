@@ -3,14 +3,14 @@ using NUnit.Framework.Interfaces;
 
 namespace AutomationApp.UiTests.Utilities
 {
-    public class AllureBrowserSuiteListener: ITestListener
+    public class AllureBrowserSuiteAttribute: TestActionAttribute
     {
-        public void TestStarted(ITest test)
+        public override void BeforeTest(ITest test)
         {
             if (test.IsSuite)
                 return;
 
-            var browser = Environment.GetEnvironmentVariable("BROWSER") ?? "chromium";
+            var browser = Environment.GetEnvironmentVariable("BROWSER") ?? UiConstants.BrowserChromium;
             var className = test.ClassName?.Split('.').Last() ?? "UnknownClass";
 
             AllureLifecycle.Instance.UpdateTestCase(x =>
@@ -27,8 +27,6 @@ namespace AutomationApp.UiTests.Utilities
             });
         }
 
-        public void TestFinished(ITestResult result) { }
-        public void TestOutput(TestOutput output) { }
-        public void SendMessage(TestMessage message) { }
+        public override ActionTargets Targets => ActionTargets.Test;
     }
 }
