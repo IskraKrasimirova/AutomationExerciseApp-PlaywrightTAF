@@ -63,7 +63,7 @@ jobs:
     # Upload Allure Results
     # -------------------------
     - name: Upload Allure Results (API)
-      if: always()
+      if: matrix.browser == 'chromium'
       uses: actions/upload-artifact@v4
       with:
         name: allure-results-api
@@ -75,6 +75,13 @@ jobs:
       with:
         name: allure-results-ui-${{ matrix.browser }}
         path: AutomationApp.UiTests/bin/Debug/net8.0/allure-results
+
+    - name: Upload TRX (UI)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ui-tests-trx-${{ matrix.browser }}
+        path: AutomationApp.UiTests/TestResults
 
   # ---------------------------------------------------------
   # JOB 2: GENERATE ALLURE REPORT (single job)
