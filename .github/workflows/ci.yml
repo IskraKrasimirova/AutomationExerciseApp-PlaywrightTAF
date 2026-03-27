@@ -62,6 +62,10 @@ jobs:
       env:
         BROWSER: ${{ matrix.browser }}
 
+    - name: Add Allure environment file
+      run: |
+        echo "browser=${{ matrix.browser }}" > AutomationApp.UiTests/bin/Debug/net8.0/allure-results/environment.properties
+
     # -------------------------
     # Upload Allure Results
     # -------------------------
