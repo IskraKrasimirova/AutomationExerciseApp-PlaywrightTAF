@@ -15,5 +15,8 @@
         public const string ProductsUrl = "/products";
         public const string ProductDetailsUrl = "/product_details/";
         public const string SignupUrl = "/signup";
+        public const string BrowserChromium = "chromium";
+        public const string BrowserFirefox = "firefox";
+        public const string BrowserWebkit = "webkit";
     }
 }

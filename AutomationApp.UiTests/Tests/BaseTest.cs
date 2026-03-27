@@ -1,5 +1,6 @@
 ﻿using Allure.Net.Commons;
 using AutomationApp.Common.Utilities;
+using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
@@ -9,6 +10,7 @@ namespace AutomationApp.UiTests.Tests
         protected IPage Page = null!;
         private IPlaywright _playwright = null!;
         private IBrowser _browser = null!;
+        private string _browserName = UiConstants.BrowserChromium;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
@@ -16,25 +18,25 @@ namespace AutomationApp.UiTests.Tests
             var isCi = Environment.GetEnvironmentVariable("CI") == "true";
 
             _playwright = await Playwright.CreateAsync();
-            var browserName = Environment.GetEnvironmentVariable("BROWSER") ?? "chromium";
+            _browserName = Environment.GetEnvironmentVariable("BROWSER") ?? UiConstants.BrowserChromium;
 
-            switch (browserName)
+            switch (_browserName)
             {
-                case "chromium":
+                case UiConstants.BrowserChromium:
                     _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
                     {
                         Headless = isCi,
                         Args = isCi ? [] : ["--start-maximized"]
                     });
                     break;
-                case "firefox":
+                case UiConstants.BrowserFirefox:
                     _browser = await _playwright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions
                     {
                         Headless = isCi,
                         Args = isCi ? [] : ["--start-maximized"]
                     });
                     break;
-                case "webkit":
+                case UiConstants.BrowserWebkit:
                     _browser = await _playwright.Webkit.LaunchAsync(new BrowserTypeLaunchOptions
                     {
                         Headless = isCi,
@@ -42,7 +44,7 @@ namespace AutomationApp.UiTests.Tests
                     });
                     break;
                 default:
-                    throw new ArgumentException($"Unsupported browser: '{browserName}'. Valid options are: chromium, firefox, webkit.");
+                    throw new ArgumentException($"Unsupported browser: '{_browserName}'. Valid options are: chromium, firefox, webkit.");
             }
         }
 
@@ -76,6 +78,12 @@ namespace AutomationApp.UiTests.Tests
             context.SetDefaultTimeout(10000);
 
             Page = await context.NewPageAsync();
+
+            // Add Allure browser label
+            AllureLifecycle.Instance.UpdateTestCase(test =>
+            {
+                test.labels.Add(new Label { name = "browser", value = _browserName });
+            });
         }
 
         [TearDown]
