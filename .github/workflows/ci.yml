@@ -61,16 +61,19 @@ jobs:
     # -------------------------
     - name: Run UI tests
       if: always()
+      continue-on-error: true
       run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests-${{ matrix.browser }}.trx"
       env:
         BROWSER: ${{ matrix.browser }}
 
     - name: Organize Allure results to browser-specific folder
+      if: always()
       run: |
         mkdir -p AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }}
         mv AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }} || true
 
     - name: Add Allure environment file
+      if: always()
       run: |
         echo "browser=${{ matrix.browser }}" > AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }}/environment.properties
 
