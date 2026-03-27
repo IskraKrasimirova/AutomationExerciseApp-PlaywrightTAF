@@ -23,11 +23,6 @@ namespace AutomationApp.UiTests.Tests
             _playwright = await Playwright.CreateAsync();
             _browserName = Environment.GetEnvironmentVariable("BROWSER") ?? UiConstants.BrowserChromium;
 
-            AllureLifecycle.Instance.UpdateTestContainer(container =>
-            {
-                container.name = $"UI Tests - {_browserName}";
-            });
-
             switch (_browserName)
             {
                 case UiConstants.BrowserChromium:
@@ -86,6 +81,11 @@ namespace AutomationApp.UiTests.Tests
             context.SetDefaultTimeout(10000);
 
             Page = await context.NewPageAsync();
+
+            AllureLifecycle.Instance.UpdateTestCase(x =>
+            {
+                x.labels.Add(new Label { name = "parentSuite", value = _browserName });
+            });
         }
 
         [TearDown]
