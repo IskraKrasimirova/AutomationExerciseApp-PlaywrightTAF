@@ -79,7 +79,11 @@ namespace AutomationApp.UiTests.Tests
             context.SetDefaultTimeout(10000);
 
             Page = await context.NewPageAsync();
+        }
 
+        [TearDown]
+        public async Task TearDown()
+        {
             AllureLifecycle.Instance.UpdateTestCase(x =>
             {
                 x.labels.RemoveAll(l => l.name == "suite" || l.name == "parentSuite" || l.name == "subSuite");
@@ -92,11 +96,6 @@ namespace AutomationApp.UiTests.Tests
                 x.labels.Add(new Label { name = "layer", value = "ui" });
             });
 
-        }
-
-        [TearDown]
-        public async Task TearDown()
-        {
             await Page.Context.CloseAsync();
         }
 
