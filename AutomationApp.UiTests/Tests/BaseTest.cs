@@ -1,10 +1,10 @@
-﻿using Allure.Net.Commons;
-using AutomationApp.Common.Utilities;
+﻿using AutomationApp.Common.Utilities;
 using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
 {
+    [BrowserLabel]
     public class BaseTest
     {
         protected IPage Page = null!;
@@ -78,12 +78,6 @@ namespace AutomationApp.UiTests.Tests
             context.SetDefaultTimeout(10000);
 
             Page = await context.NewPageAsync();
-
-            // Add Allure browser label
-            AllureLifecycle.Instance.UpdateTestCase(test =>
-            {
-                test.labels.Add(new Label { name = "browser", value = _browserName });
-            });
         }
 
         [TearDown]
