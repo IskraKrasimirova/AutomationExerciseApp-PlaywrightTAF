@@ -10,8 +10,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  # ---------------------------------------------------------
+  # JOB 1: BUILD + TEST (matrix)
+  # ---------------------------------------------------------
   build-and-test:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
 
     container:
       image: mcr.microsoft.com/playwright:v1.58.0-jammy
@@ -36,7 +43,7 @@ jobs:
 
     - name: Clean Allure results (UI)
       run: rm -rf AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* || true
-      
+
     # -------------------------
     # API TESTS
     # -------------------------
@@ -44,14 +51,16 @@ jobs:
       run: dotnet test AutomationApp.ApiTests/AutomationApp.ApiTests.csproj --logger "trx;LogFileName=api-tests.trx"
 
     # -------------------------
-    # UI TESTS 
+    # UI TESTS (matrix)
     # -------------------------
     - name: Run UI tests
       if: always()
-      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests.trx"
+      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests-${{ matrix.browser }}.trx"
+      env:
+        BROWSER: ${{ matrix.browser }}
 
     # -------------------------
-    # Collect Allure Results
+    # Upload Allure Results
     # -------------------------
     - name: Upload Allure Results (API)
       if: always()
@@ -64,52 +73,72 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-results-ui
+        name: allure-results-ui-${{ matrix.browser }}
         path: AutomationApp.UiTests/bin/Debug/net8.0/allure-results
 
-    # -------------------------
-    # Generate Allure Report
-    # -------------------------
+  # ---------------------------------------------------------
+  # JOB 2: GENERATE ALLURE REPORT (single job)
+  # ---------------------------------------------------------
+  generate-report:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Download API results
+    - name: Download Allure Results (API)
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results-api
+        path: merged-results
+
+    # Download UI results for all browsers
+    - name: Download Allure Results (UI Chromium)
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results-ui-chromium
+        path: merged-results
+
+    - name: Download Allure Results (UI Firefox)
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results-ui-firefox
+        path: merged-results
+
+    - name: Download Allure Results (UI WebKit)
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results-ui-webkit
+        path: merged-results
+
     - name: Install Allure CLI
-      if: always()
       run: npm install -g allure-commandline --save-dev
 
-    - name: Merge Allure Results
-      if: always()
-      run: |
-        mkdir merged-results
-        cp -a AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/. merged-results/ || true
-        cp -a AutomationApp.UiTests/bin/Debug/net8.0/allure-results/. merged-results/ || true
-
     - name: Copy history from previous report
-      if: always()
       run: |
         if [ -d allure-report/history ]; then
           cp -a allure-report/history merged-results/history || true
         fi
 
     - name: Install Java
-      if: always()
       run: |
         apt-get update
         apt-get install -y default-jre
 
     - name: Generate Allure HTML report
-      if: always()
       run: allure generate merged-results -o allure-report --clean
 
     - name: Upload Allure Report
-      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: allure-report
 
     - name: Deploy Allure Report to GitHub Pages
-      if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./allure-report
         publish_branch: gh-pages
-

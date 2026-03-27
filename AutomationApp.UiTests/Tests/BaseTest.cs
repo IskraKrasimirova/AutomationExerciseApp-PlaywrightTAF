@@ -16,11 +16,34 @@ namespace AutomationApp.UiTests.Tests
             var isCi = Environment.GetEnvironmentVariable("CI") == "true";
 
             _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            var browserName = Environment.GetEnvironmentVariable("BROWSER") ?? "chromium";
+
+            switch (browserName)
             {
-                Headless = isCi,
-                Args = isCi ? [] : ["--start-maximized"]
-            });
+                case "chromium":
+                    _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+                    {
+                        Headless = isCi,
+                        Args = isCi ? [] : ["--start-maximized"]
+                    });
+                    break;
+                case "firefox":
+                    _browser = await _playwright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions
+                    {
+                        Headless = isCi,
+                        Args = isCi ? [] : ["--start-maximized"]
+                    });
+                    break;
+                case "webkit":
+                    _browser = await _playwright.Webkit.LaunchAsync(new BrowserTypeLaunchOptions
+                    {
+                        Headless = isCi,
+                        Args = isCi ? [] : ["--start-maximized"]
+                    });
+                    break;
+                default:
+                    throw new ArgumentException($"Unsupported browser: '{browserName}'. Valid options are: chromium, firefox, webkit.");
+            }
         }
 
         [SetUp]
