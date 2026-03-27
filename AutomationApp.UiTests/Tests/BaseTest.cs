@@ -1,4 +1,5 @@
-﻿using AutomationApp.Common.Utilities;
+﻿using Allure.Net.Commons;
+using AutomationApp.Common.Utilities;
 using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 
@@ -78,11 +79,16 @@ namespace AutomationApp.UiTests.Tests
 
             Page = await context.NewPageAsync();
         }
-
+                
         [TearDown]
         public async Task TearDown()
         {
-            await Page.Context.CloseAsync();
+            AllureLifecycle.Instance.UpdateTestCase(x => { });
+
+            if (Page?.Context != null)
+            {
+                await Page.Context.CloseAsync();
+            }
         }
 
         [OneTimeTearDown]
