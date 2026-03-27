@@ -7,8 +7,8 @@ using AutomationApp.UiTests.Utilities;
 namespace AutomationApp.UiTests.Tests
 {
     [AllureNUnit]
-    [AllureSuite("UI Tests")]
-    [AllureSubSuite("Products")]
+    //[AllureSuite("UI Tests")]
+    //[AllureSubSuite("Products")]
     [Category("Products")]
     public class ProductsTests: BaseTest
     {
