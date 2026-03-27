@@ -6,8 +6,6 @@ using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
 {
-    [AllureSuite("UI Tests")]
-    [AllureLabel("layer", "ui")]
     public class BaseTest
     {
         protected IPage Page = null!;
@@ -84,7 +82,13 @@ namespace AutomationApp.UiTests.Tests
 
             AllureLifecycle.Instance.UpdateTestCase(x =>
             {
-                x.labels.Add(new Label { name = "parentSuite", value = _browserName });
+                x.labels.RemoveAll(l => l.name == "suite" || l.name == "parentSuite");
+
+                x.labels.Add(new Label { name = "parentSuite", value = "UI Tests" });
+                x.labels.Add(new Label { name = "suite", value = _browserName });
+
+                x.labels.RemoveAll(l => l.name == "layer");
+                x.labels.Add(new Label { name = "layer", value = "ui" });
             });
         }
 
