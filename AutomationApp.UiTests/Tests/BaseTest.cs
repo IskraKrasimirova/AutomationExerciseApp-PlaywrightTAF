@@ -1,10 +1,13 @@
-﻿using AutomationApp.Common.Utilities;
+﻿using Allure.Net.Commons;
+using Allure.NUnit.Attributes;
+using AutomationApp.Common.Utilities;
 using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
 {
-    [BrowserLabel]
+    [AllureSuite("UI Tests")]
+    [AllureLabel("layer", "ui")]
     public class BaseTest
     {
         protected IPage Page = null!;
@@ -78,6 +81,13 @@ namespace AutomationApp.UiTests.Tests
             context.SetDefaultTimeout(10000);
 
             Page = await context.NewPageAsync();
+
+            _browserName = Environment.GetEnvironmentVariable("BROWSER") ?? UiConstants.BrowserChromium;
+            AllureLifecycle.Instance.UpdateTestCase(x =>
+            {
+                x.labels.Add(new Label { name = "browser", value = _browserName });
+                x.labels.Add(new Label { name = "suite", value = $"UI Tests - {_browserName}" });
+            });
         }
 
         [TearDown]
