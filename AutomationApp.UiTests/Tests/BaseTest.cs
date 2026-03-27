@@ -1,6 +1,4 @@
-﻿using Allure.Net.Commons;
-using Allure.NUnit.Attributes;
-using AutomationApp.Common.Utilities;
+﻿using AutomationApp.Common.Utilities;
 using AutomationApp.UiTests.Utilities;
 using Microsoft.Playwright;
 
@@ -84,18 +82,6 @@ namespace AutomationApp.UiTests.Tests
         [TearDown]
         public async Task TearDown()
         {
-            AllureLifecycle.Instance.UpdateTestCase(x =>
-            {
-                x.labels.RemoveAll(l => l.name == "suite" || l.name == "parentSuite" || l.name == "subSuite");
-
-                x.labels.Add(new Label { name = "parentSuite", value = "UI Tests" });
-                x.labels.Add(new Label { name = "suite", value = _browserName });
-                x.labels.Add(new Label { name = "subSuite", value = GetType().Name });
-
-                x.labels.RemoveAll(l => l.name == "layer");
-                x.labels.Add(new Label { name = "layer", value = "ui" });
-            });
-
             await Page.Context.CloseAsync();
         }
 

@@ -61,7 +61,7 @@ jobs:
     # -------------------------
     - name: Run UI tests
       if: always()
-      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests-${{ matrix.browser }}.trx"
+      run: dotnet test AutomationApp.UiTests/AutomationApp.UiTests.csproj --logger "trx;LogFileName=ui-tests-${{ matrix.browser }}.trx" --test-listener:AutomationApp.UiTests.Utilities.AllureBrowserSuiteListener
       env:
         BROWSER: ${{ matrix.browser }}
 
