@@ -3,6 +3,7 @@ using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
+using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -58,6 +59,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task UserCanLoginSuccessfully()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             await _loginPage.Login(_registeredUser.Email, _registeredUser.Password);
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.VerifyUserIsLoggedIn(_registeredUser.Name);
@@ -67,6 +70,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task UserCannotLoginWithWrongPassword()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             await _loginPage.Login(_registeredUser.Email, "wrongpassword");
             await _loginPage.VerifyInvalidCredentialsError();
         }
@@ -75,6 +80,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task UserCannotLoginWithNonExistingEmail()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             await _loginPage.Login("nonexisting@email.com", "somepassword");
             await _loginPage.VerifyInvalidCredentialsError();
         }

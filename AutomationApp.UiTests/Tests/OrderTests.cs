@@ -2,6 +2,7 @@
 using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
+using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -48,6 +49,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("E2E")]
         public async Task RegisterDuringCheckout_PlacesOrderSuccessfully()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             // Add product to cart
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
@@ -108,6 +111,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("E2E")]
         public async Task RegisterBeforeCheckout_PlacesOrderSuccessfully()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             // Register
             var newUser = UserFactory.CreateDefault();
             await _homePage.VerifyIsAtHomePage();

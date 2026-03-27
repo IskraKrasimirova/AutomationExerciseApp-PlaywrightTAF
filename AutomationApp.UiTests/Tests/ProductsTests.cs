@@ -2,6 +2,7 @@
 using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models;
 using AutomationApp.UiTests.Pages;
+using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -30,6 +31,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task ViewProductDetails_ForTheFirstProduct_DisplaysCorrectDetails()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
@@ -49,6 +52,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task SearchProduct_WithValidSearchTerm_DisplaysSearchResults()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
