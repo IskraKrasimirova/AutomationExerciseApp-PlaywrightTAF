@@ -47,6 +47,9 @@ jobs:
     - name: Clean Allure results (UI)
       run: rm -rf AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* || true
 
+    - name: Clean Allure results (UI per browser)
+      run: rm -rf AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }} || true
+
     # -------------------------
     # API TESTS
     # -------------------------
@@ -62,9 +65,14 @@ jobs:
       env:
         BROWSER: ${{ matrix.browser }}
 
+    - name: Organize Allure results to browser-specific folder
+      run: |
+        mkdir -p AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }}
+        mv AutomationApp.UiTests/bin/Debug/net8.0/allure-results/* AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }} || true
+
     - name: Add Allure environment file
       run: |
-        echo "browser=${{ matrix.browser }}" > AutomationApp.UiTests/bin/Debug/net8.0/allure-results/environment.properties
+        echo "browser=${{ matrix.browser }}" > AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }}/environment.properties
 
     # -------------------------
     # Upload Allure Results
@@ -81,7 +89,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: allure-results-ui-${{ matrix.browser }}
-        path: AutomationApp.UiTests/bin/Debug/net8.0/allure-results
+        path: AutomationApp.UiTests/bin/Debug/net8.0/allure-results-${{ matrix.browser }}
 
     - name: Upload TRX (UI)
       if: always()
