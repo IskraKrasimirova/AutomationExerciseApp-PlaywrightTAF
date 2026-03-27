@@ -23,6 +23,9 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.58.0-jammy
 
+    env:
+     HOME: /root
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
