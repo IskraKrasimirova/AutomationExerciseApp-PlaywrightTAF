@@ -1,4 +1,4 @@
-﻿# AutomationApp Test Framework
+﻿# AutomationExercise Test Automation Framework
 
 ![CI Pipeline](https://github.com/IskraKrasimirova/AutomationExerciseApp-PlaywrightTAF/actions/workflows/ci.yml/badge.svg)
 
