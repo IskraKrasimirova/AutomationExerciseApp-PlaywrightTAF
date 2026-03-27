@@ -2,6 +2,10 @@
 
 ![CI Pipeline](https://github.com/IskraKrasimirova/AutomationExerciseApp-PlaywrightTAF/actions/workflows/ci.yml/badge.svg)
 
+
+[![Allure Report](https://img.shields.io/badge/Allure-Report-ff69b4?logo=allure&logoColor=white)](https://iskrakrasimirova.github.io/AutomationExerciseApp-PlaywrightTAF/)
+
+
 A test automation framework built with C# for UI and API testing of the [AutomationExercise](https://automationexercise.com) e-commerce practice website.
 
 ---
@@ -124,6 +128,33 @@ dotnet test --filter Category=Smoke
 dotnet test --filter Category=E2E
 dotnet test --filter Category=UserAccountApi
 ```
+
+---
+
+## Allure Test Report
+
+This project includes full Allure reporting for both UI and API test runs.
+The report is automatically generated and published on every pipeline execution.
+
+🔗 Live Report: [Allure Report](https://iskrakrasimirova.github.io/AutomationExerciseApp-PlaywrightTAF/)
+
+### How it works
+
+The CI pipeline:
+
+- Cleans previous Allure results
+- Runs API and UI tests
+- Merges results from both projects
+- Generates the HTML report using Allure CLI
+- Deploys it automatically to GitHub Pages
+
+
+To generate and view the Allure report locally after running tests, use the following command:
+```bash
+allure serve merged-results
+```
+
+This starts a local server and opens the interactive report in your browser.
 
 ---
 
