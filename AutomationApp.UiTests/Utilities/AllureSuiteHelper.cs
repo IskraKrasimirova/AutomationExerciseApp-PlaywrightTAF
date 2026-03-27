@@ -11,6 +11,7 @@ namespace AutomationApp.UiTests.Utilities
             AllureApi.AddParentSuite("UI Tests");
             AllureApi.AddSuite(browser);
             AllureApi.AddSubSuite(className);
+            AllureApi.AddTestParameter("browser", browser);
             //var className = TestContext.CurrentContext.Test.ClassName?.Split('.').Last() ?? "UnknownClass";
 
             //AllureLifecycle.Instance.UpdateTestCase(x =>

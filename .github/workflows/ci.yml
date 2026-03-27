@@ -145,23 +145,9 @@ jobs:
     - name: Merge Allure results
       run: |
         mkdir -p merged-results/all
-        # Add browser prefix to avoid filename collisions
-        for f in merged-results/chromium/*.json; do
-          [ -f "$f" ] && cp "$f" "merged-results/all/chromium_$(basename $f)" || true
-        done
-        for f in merged-results/firefox/*.json; do
-          [ -f "$f" ] && cp "$f" "merged-results/all/firefox_$(basename $f)" || true
-        done
-        for f in merged-results/webkit/*.json; do
-          [ -f "$f" ] && cp "$f" "merged-results/all/webkit_$(basename $f)" || true
-        done
-        
-        # Copy txt attachments without prefix (they're referenced by UUID in JSON)
-        cp merged-results/chromium/*.txt merged-results/all/ 2>/dev/null || true
-        cp merged-results/firefox/*.txt merged-results/all/ 2>/dev/null || true
-        cp merged-results/webkit/*.txt merged-results/all/ 2>/dev/null || true
-        
-        # Copy API results
+        cp -r merged-results/chromium/* merged-results/all/ 2>/dev/null || true
+        cp -r merged-results/firefox/* merged-results/all/ 2>/dev/null || true
+        cp -r merged-results/webkit/* merged-results/all/ 2>/dev/null || true
         cp merged-results/*.json merged-results/all/ 2>/dev/null || true
 
     - name: Install Allure CLI
