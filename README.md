@@ -3,7 +3,7 @@
 ![CI Pipeline](https://github.com/IskraKrasimirova/AutomationExerciseApp-PlaywrightTAF/actions/workflows/ci.yml/badge.svg)
 
 
-[![Allure Report](https://img.shields.io/badge/Allure-Report-ff69b4?logo=allure&logoColor=white)](https://iskrakrasimirova.github.io/AutomationExerciseApp-PlaywrightTAF/)
+[![Allure Report](https://img.shields.io/badge/Allure-Report-6f42c1?logo=allure&logoColor=white)](https://iskrakrasimirova.github.io/AutomationExerciseApp-PlaywrightTAF/)
 
 
 A test automation framework built with C# for UI and API testing of the [AutomationExercise](https://automationexercise.com) e-commerce practice website.
