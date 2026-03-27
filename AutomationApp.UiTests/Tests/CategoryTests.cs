@@ -1,6 +1,7 @@
 ﻿using Allure.NUnit;
 using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Pages;
+using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -29,6 +30,8 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task NavigatingBetweenCategories_DisplaysCorrectCategoryPage()
         {
+            AllureSuiteHelper.ApplySuiteLabels();
+
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();

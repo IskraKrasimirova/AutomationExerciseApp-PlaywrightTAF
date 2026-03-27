@@ -127,19 +127,26 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: allure-results-ui-chromium
-        path: merged-results
+        path: merged-results/chromium
 
     - name: Download Allure Results (UI Firefox)
       uses: actions/download-artifact@v4
       with:
         name: allure-results-ui-firefox
-        path: merged-results
+        path: merged-results/firefox
 
     - name: Download Allure Results (UI WebKit)
       uses: actions/download-artifact@v4
       with:
         name: allure-results-ui-webkit
-        path: merged-results
+        path: merged-results/webkit
+
+    - name: Merge Allure results
+      run: |
+        mkdir -p merged-results/all
+        cp -r merged-results/chromium/* merged-results/all/ || true
+        cp -r merged-results/firefox/* merged-results/all/ || true
+        cp -r merged-results/webkit/* merged-results/all/ || true
 
     - name: Install Allure CLI
       run: npm install -g allure-commandline --save-dev
@@ -156,7 +163,7 @@ jobs:
         apt-get install -y default-jre
 
     - name: Generate Allure HTML report
-      run: allure generate merged-results -o allure-report --clean
+      run: allure generate merged-results/all -o allure-report --clean
 
     - name: Upload Allure Report
       uses: actions/upload-artifact@v4
