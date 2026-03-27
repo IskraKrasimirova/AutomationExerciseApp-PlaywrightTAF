@@ -78,6 +78,13 @@ jobs:
         cp -a AutomationApp.ApiTests/bin/Debug/net8.0/allure-results/. merged-results/ || true
         cp -a AutomationApp.UiTests/bin/Debug/net8.0/allure-results/. merged-results/ || true
 
+    - name: Copy history from previous report
+      if: always()
+      run: |
+        if [ -d allure-report/history ]; then
+          cp -a allure-report/history merged-results/history || true
+        fi
+
     - name: Install Java
       if: always()
       run: |
