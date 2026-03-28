@@ -123,17 +123,10 @@ jobs:
         path: gh-pages-previous
       continue-on-error: true
 
-    - name: Copy history from previous report
-      run: |
-        if [ -d gh-pages-previous/history ]; then
-          mkdir -p merged-results/all
-          cp -r gh-pages-previous/history merged-results/all/history || true
-        fi
-      continue-on-error: true
-
     # Download API results
     - name: Download Allure Results (API)
       uses: actions/download-artifact@v4
+      continue-on-error: true
       with:
         name: allure-results-api
         path: merged-results
@@ -141,18 +134,21 @@ jobs:
     # Download UI results for all browsers
     - name: Download Allure Results (UI Chromium)
       uses: actions/download-artifact@v4
+      continue-on-error: true
       with:
         name: allure-results-ui-chromium
         path: merged-results/chromium
 
     - name: Download Allure Results (UI Firefox)
       uses: actions/download-artifact@v4
+      continue-on-error: true
       with:
         name: allure-results-ui-firefox
         path: merged-results/firefox
 
     - name: Download Allure Results (UI WebKit)
       uses: actions/download-artifact@v4
+      continue-on-error: true
       with:
         name: allure-results-ui-webkit
         path: merged-results/webkit
@@ -165,12 +161,36 @@ jobs:
         cp -r merged-results/webkit/* merged-results/all/ 2>/dev/null || true
         cp merged-results/*.json merged-results/all/ 2>/dev/null || true
 
+    - name: Copy history from previous report
+      run: |
+        if [ -d gh-pages-previous/history ]; then
+          mkdir -p merged-results/all
+          cp -r gh-pages-previous/history merged-results/all/history || true
+        fi
+      continue-on-error: true
+
     - name: Create environment properties
       run: |
         echo "Browsers=chromium, firefox, webkit" > merged-results/all/environment.properties
         echo "Platform=Ubuntu" >> merged-results/all/environment.properties
-        echo "Framework=Playwright + NUnit" >> merged-results/all/environment.properties
+        echo "UI Framework=Playwright + NUnit" >> merged-results/all/environment.properties
+        echo "API Framework=RestSharp + NUnit" >> merged-results/all/environment.properties
         echo "Language=C#" >> merged-results/all/environment.properties
+
+    - name: Create executor info
+      run: |
+        cat > merged-results/all/executor.json << EOF
+        {
+          "name": "GitHub Actions",
+          "type": "github",
+          "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+          "buildOrder": ${{ github.run_number }},
+          "buildName": "CI Pipeline #${{ github.run_number }}",
+          "buildUrl": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+          "reportUrl": "https://iskrakrasimirova.github.io/AutomationExerciseApp-PlaywrightTAF/",
+          "reportName": "Allure Report"
+        }
+        EOF
 
     - name: Install Allure CLI
       run: npm install -g allure-commandline --save-dev
