@@ -1,15 +1,11 @@
 ﻿using Allure.NUnit;
-using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
-using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
     [AllureNUnit]
-    //[AllureSuite("UI Tests")]
-    //[AllureSubSuite("Register")]
     [Category("Register")]
     public class RegisterTests : BaseTest
     {
@@ -35,8 +31,6 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task UserCanRegisterSuccessfully()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             var newUser = UserFactory.CreateDefault();
 
             await RegisterUser(newUser);
@@ -48,8 +42,6 @@ namespace AutomationApp.UiTests.Tests
         [Category("E2E")]
         public async Task NewlyRegisteredUserCanLoginSuccessfully()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             var user = UserFactory.CreateDefault();
             await RegisterUser(user);
             await _homePage.NavBar.Logout();
@@ -67,8 +59,6 @@ namespace AutomationApp.UiTests.Tests
         [Category("E2E")]
         public async Task UserCannotRegisterWithExistingEmail()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             var user = UserFactory.CreateDefault();
             await RegisterUser(user);
             await _homePage.NavBar.Logout();

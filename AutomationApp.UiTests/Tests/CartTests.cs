@@ -1,13 +1,9 @@
 ﻿using Allure.NUnit;
-using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Pages;
-using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
     [AllureNUnit]
-    //[AllureSuite("UI Tests")]
-    //[AllureSubSuite("Cart")]
     [Category("Cart")]
     public class CartTests : BaseTest
     {
@@ -34,8 +30,6 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task AddTwoProductsToCart_ShowsCorrectProductDetails()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
@@ -65,8 +59,6 @@ namespace AutomationApp.UiTests.Tests
         [Test]
         public async Task NavigateToCart_WithNoProducts_ShowsEmptyCartAndLinkToProducts()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToCartPage();
             await _cartPage.VerifyIsAtCartPage();
@@ -78,8 +70,6 @@ namespace AutomationApp.UiTests.Tests
         [Test]
         public async Task AddProductToCart_WithCustomQuantity_ShowsCorrectQuantityAndTotalPriceInCart()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
@@ -108,8 +98,6 @@ namespace AutomationApp.UiTests.Tests
         [Test]
         public async Task RemovingProductFromCart_LeavesCartEmpty()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();
@@ -131,8 +119,6 @@ namespace AutomationApp.UiTests.Tests
         [Test]
         public async Task RemovingOneProductFromCart_OtherProductsRemainInCart()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();

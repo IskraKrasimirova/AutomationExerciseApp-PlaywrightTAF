@@ -1,13 +1,9 @@
 ﻿using Allure.NUnit;
-using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Pages;
-using AutomationApp.UiTests.Utilities;
 
 namespace AutomationApp.UiTests.Tests
 {
     [AllureNUnit]
-    //[AllureSuite("UI Tests")]
-    //[AllureSubSuite("Brand")]
     [Category("BrandProducts")]
     public class BrandTests : BaseTest
     {
@@ -30,8 +26,6 @@ namespace AutomationApp.UiTests.Tests
         [Category("Smoke")]
         public async Task NavigatingBetweenBrands_DisplaysCorrectBrandPageWithExpectedProductCount()
         {
-            AllureSuiteHelper.ApplySuiteLabels();
-
             await _homePage.VerifyIsAtHomePage();
             await _homePage.NavBar.GoToProductsPage();
             await _productsPage.VerifyIsAtProductsPage();

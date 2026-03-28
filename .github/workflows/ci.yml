@@ -150,6 +150,15 @@ jobs:
         cp -r merged-results/webkit/* merged-results/all/ 2>/dev/null || true
         cp merged-results/*.json merged-results/all/ 2>/dev/null || true
 
+    - name: Create environment properties
+      run: |
+        cat > merged-results/all/environment.properties << EOF
+        Browsers=chromium, firefox, webkit
+        Platform=Ubuntu
+        Framework=Playwright + NUnit
+        Language=C#
+        EOF
+
     - name: Install Allure CLI
       run: npm install -g allure-commandline --save-dev
 
