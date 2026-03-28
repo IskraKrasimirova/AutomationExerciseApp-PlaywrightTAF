@@ -152,12 +152,10 @@ jobs:
 
     - name: Create environment properties
       run: |
-        cat > merged-results/all/environment.properties << EOF
-        Browsers=chromium, firefox, webkit
-        Platform=Ubuntu
-        Framework=Playwright + NUnit
-        Language=C#
-        EOF
+        echo "Browsers=chromium, firefox, webkit" > merged-results/all/environment.properties
+        echo "Platform=Ubuntu" >> merged-results/all/environment.properties
+        echo "Framework=Playwright + NUnit" >> merged-results/all/environment.properties
+        echo "Language=C#" >> merged-results/all/environment.properties
 
     - name: Install Allure CLI
       run: npm install -g allure-commandline --save-dev
