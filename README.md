@@ -133,25 +133,24 @@ dotnet test --filter Category=UserAccountApi
 
 ## Allure Test Report
 
-This project includes full Allure reporting for both UI and API test runs.
+This project includes full Allure reporting for both UI and API test runs across multiple browsers.
 The report is automatically generated and published on every pipeline execution.
 
 🔗 Live Report: [Allure Report](https://iskrakrasimirova.github.io/AutomationExerciseApp-PlaywrightTAF/)
 
 ### How it works
 
-The CI pipeline:
+The CI pipeline runs UI tests in parallel across **Chromium, Firefox and WebKit** using a GitHub Actions matrix strategy. Results from all browsers and the API test run are merged into a single Allure report, giving full cross-browser visibility in one place.
 
-- Cleans previous Allure results
-- Runs API and UI tests
-- Merges results from both projects
+The pipeline:
+- Runs API and UI tests (UI tests run in parallel across 3 browsers)
+- Merges results from all browsers and both projects
 - Generates the HTML report using Allure CLI
 - Deploys it automatically to GitHub Pages
 
-
-To generate and view the Allure report locally after running tests, use the following command:
+To generate and view the Allure report locally after running tests:
 ```bash
-allure serve merged-results
+allure serve AutomationApp.UiTests/bin/Debug/net8.0/allure-results
 ```
 
 This starts a local server and opens the interactive report in your browser.
