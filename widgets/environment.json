@@ -1,1 +1,1 @@
-[{"values":["webkit"],"name":"browser"}]
+[{"values":["chromium, firefox, webkit"],"name":"Browsers"},{"values":["Ubuntu"],"name":"Platform"},{"values":["Playwright + NUnit"],"name":"Framework"},{"values":["C#"],"name":"Language"}]
