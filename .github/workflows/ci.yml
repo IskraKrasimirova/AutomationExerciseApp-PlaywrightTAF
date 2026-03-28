@@ -116,6 +116,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Download previous Allure report from gh-pages
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        path: gh-pages-previous
+      continue-on-error: true
+
+    - name: Copy history from previous report
+      run: |
+        if [ -d gh-pages-previous/history ]; then
+          mkdir -p merged-results/all
+          cp -r gh-pages-previous/history merged-results/all/history || true
+        fi
+      continue-on-error: true
+
     # Download API results
     - name: Download Allure Results (API)
       uses: actions/download-artifact@v4
@@ -159,13 +174,7 @@ jobs:
 
     - name: Install Allure CLI
       run: npm install -g allure-commandline --save-dev
-
-    - name: Copy history from previous report
-      run: |
-        if [ -d allure-report/history ]; then
-          cp -a allure-report/history merged-results/history || true
-        fi
-
+      
     - name: Install Java
       run: |
         apt-get update
