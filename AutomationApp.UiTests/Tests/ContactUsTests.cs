@@ -25,7 +25,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task SubmitContactUsForm_WithValidData_RedirectsToHomePage()
         {
             var contactData = ContactFormFactory.CreateDefault();
@@ -39,7 +39,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task SubmitContactUsForm_WithValidDataAndUploadFile_RedirectsToHomePage()
         {
             var contactData = ContactFormFactory.CreateDefault();

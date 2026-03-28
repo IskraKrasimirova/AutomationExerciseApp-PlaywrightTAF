@@ -173,8 +173,8 @@ jobs:
       run: |
         echo "Browsers=chromium, firefox, webkit" > merged-results/all/environment.properties
         echo "Platform=Ubuntu" >> merged-results/all/environment.properties
-        echo "UI Framework=Playwright + NUnit" >> merged-results/all/environment.properties
-        echo "API Framework=RestSharp + NUnit" >> merged-results/all/environment.properties
+        echo "UI_Framework=Playwright + NUnit" >> merged-results/all/environment.properties
+        echo "API_Framework=RestSharp + NUnit" >> merged-results/all/environment.properties
         echo "Language=C#" >> merged-results/all/environment.properties
 
     - name: Create executor info

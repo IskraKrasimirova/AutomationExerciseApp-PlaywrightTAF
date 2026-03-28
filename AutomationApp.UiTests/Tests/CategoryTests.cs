@@ -25,7 +25,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task NavigatingBetweenCategories_DisplaysCorrectCategoryPage()
         {
             await _homePage.VerifyIsAtHomePage();

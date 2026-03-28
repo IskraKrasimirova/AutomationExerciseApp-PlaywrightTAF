@@ -26,7 +26,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task ViewProductDetails_ForTheFirstProduct_DisplaysCorrectDetails()
         {
             await _homePage.VerifyIsAtHomePage();
@@ -46,7 +46,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task SearchProduct_WithValidSearchTerm_DisplaysSearchResults()
         {
             await _homePage.VerifyIsAtHomePage();

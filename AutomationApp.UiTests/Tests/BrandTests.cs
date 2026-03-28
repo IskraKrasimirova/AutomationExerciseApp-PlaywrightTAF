@@ -25,7 +25,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task NavigatingBetweenBrands_DisplaysCorrectBrandPageWithExpectedProductCount()
         {
             await _homePage.VerifyIsAtHomePage();

@@ -31,7 +31,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task UserCanRegisterSuccessfully()
         {
             var newUser = UserFactory.CreateDefault();
@@ -43,7 +43,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
-        [AllureTag("E2E")]
+        [AllureFeature("E2E")]
         public async Task NewlyRegisteredUserCanLoginSuccessfully()
         {
             var user = UserFactory.CreateDefault();
@@ -61,7 +61,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
-        [AllureTag("E2E")]
+        [AllureFeature("E2E")]
         public async Task UserCannotRegisterWithExistingEmail()
         {
             var user = UserFactory.CreateDefault();

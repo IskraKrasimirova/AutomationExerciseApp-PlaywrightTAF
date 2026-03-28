@@ -54,7 +54,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task UserCanLoginSuccessfully()
         {
             await _loginPage.Login(_registeredUser.Email, _registeredUser.Password);
@@ -64,7 +64,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task UserCannotLoginWithWrongPassword()
         {
             await _loginPage.Login(_registeredUser.Email, "wrongpassword");
@@ -73,7 +73,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task UserCannotLoginWithNonExistingEmail()
         {
             await _loginPage.Login("nonexisting@email.com", "somepassword");

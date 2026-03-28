@@ -29,7 +29,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
-        [AllureTag("Smoke")]
+        [AllureFeature("Smoke")]
         public async Task AddTwoProductsToCart_ShowsCorrectProductDetails()
         {
             await _homePage.VerifyIsAtHomePage();

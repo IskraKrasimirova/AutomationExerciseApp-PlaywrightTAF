@@ -44,7 +44,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
-        [AllureTag("E2E")]
+        [AllureFeature("E2E")]
         public async Task RegisterDuringCheckout_PlacesOrderSuccessfully()
         {
             // Add product to cart
@@ -105,7 +105,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
-        [AllureTag("E2E")]
+        [AllureFeature("E2E")]
         public async Task RegisterBeforeCheckout_PlacesOrderSuccessfully()
         {
             // Register
