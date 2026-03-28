@@ -18,6 +18,7 @@ namespace AutomationApp.UiTests.Utilities
             {
                 x.labels.RemoveAll(l => l.name == "thread");
                 x.labels.Add(new Label { name = "thread", value = browser });
+                x.labels.Add(new Label { name = "host", value = browser });
             });
         }
     }
