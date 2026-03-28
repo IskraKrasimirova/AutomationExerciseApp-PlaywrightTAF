@@ -1,1 +1,1 @@
-{"total":80,"items":[]}
+{"total":37,"items":[{"uid":"a83a8ec411f16faf2e5741a88cd98344","name":"Smoke","statistic":{"failed":0,"broken":0,"skipped":0,"passed":33,"unknown":0,"total":33}},{"uid":"6991b426e745b8821998186509d614d0","name":"E2E","statistic":{"failed":0,"broken":0,"skipped":0,"passed":12,"unknown":0,"total":12}}]}

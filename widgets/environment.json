@@ -1,1 +1,1 @@
-[{"values":["chromium, firefox, webkit"],"name":"Browsers"},{"values":["Ubuntu"],"name":"Platform"},{"values":["Framework=Playwright + NUnit"],"name":"UI"},{"values":["Framework=RestSharp + NUnit"],"name":"API"},{"values":["C#"],"name":"Language"}]
+[{"values":["chromium, firefox, webkit"],"name":"Browsers"},{"values":["Ubuntu"],"name":"Platform"},{"values":["Playwright + NUnit"],"name":"UI_Framework"},{"values":["RestSharp + NUnit"],"name":"API_Framework"},{"values":["C#"],"name":"Language"}]
