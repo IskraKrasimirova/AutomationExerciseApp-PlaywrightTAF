@@ -1,4 +1,5 @@
 ﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Pages;
 
 namespace AutomationApp.UiTests.Tests
@@ -7,9 +8,9 @@ namespace AutomationApp.UiTests.Tests
     [Category("BrandProducts")]
     public class BrandTests : BaseTest
     {
-        private HomePage _homePage;
-        private ProductsPage _productsPage;
-        private BrandProductsPage _brandProductsPage;
+        private HomePage _homePage = null!;
+        private ProductsPage _productsPage = null!;
+        private BrandProductsPage _brandProductsPage = null!;
 
         [SetUp]
         public async Task TestSetUp()
@@ -24,6 +25,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task NavigatingBetweenBrands_DisplaysCorrectBrandPageWithExpectedProductCount()
         {
             await _homePage.VerifyIsAtHomePage();

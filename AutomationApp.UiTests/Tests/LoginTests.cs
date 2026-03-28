@@ -1,4 +1,5 @@
 ﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
@@ -9,12 +10,12 @@ namespace AutomationApp.UiTests.Tests
     [Category("Login")]
     public class LoginTests: BaseTest
     {
-        private HomePage _homePage;
-        private LoginPage _loginPage;
-        private SignupPage _signupPage;
-        private AccountCreatedPage _accountCreatedPage;
-        private AccountDeletedPage _accountDeletedPage;
-        private UserModel _registeredUser;
+        private HomePage _homePage = null!;
+        private LoginPage _loginPage = null!;
+        private SignupPage _signupPage = null!;
+        private AccountCreatedPage _accountCreatedPage = null!;
+        private AccountDeletedPage _accountDeletedPage = null!;
+        private UserModel _registeredUser = null!;
 
         [SetUp]
         public async Task TestSetUp()
@@ -53,6 +54,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task UserCanLoginSuccessfully()
         {
             await _loginPage.Login(_registeredUser.Email, _registeredUser.Password);
@@ -62,6 +64,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task UserCannotLoginWithWrongPassword()
         {
             await _loginPage.Login(_registeredUser.Email, "wrongpassword");
@@ -70,6 +73,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task UserCannotLoginWithNonExistingEmail()
         {
             await _loginPage.Login("nonexisting@email.com", "somepassword");

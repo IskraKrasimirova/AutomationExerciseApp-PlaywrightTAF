@@ -1,4 +1,5 @@
 ﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
@@ -9,11 +10,11 @@ namespace AutomationApp.UiTests.Tests
     [Category("Register")]
     public class RegisterTests : BaseTest
     {
-        private HomePage _homePage;
-        private LoginPage _loginPage;
-        private SignupPage _signupPage;
-        private AccountCreatedPage _accountCreatedPage;
-        private AccountDeletedPage _accountDeletedPage;
+        private HomePage _homePage = null!;
+        private LoginPage _loginPage = null!;
+        private SignupPage _signupPage = null!;
+        private AccountCreatedPage _accountCreatedPage = null!;
+        private AccountDeletedPage _accountDeletedPage = null!;
 
         [SetUp]
         public async Task TestSetUp()
@@ -23,12 +24,14 @@ namespace AutomationApp.UiTests.Tests
             _signupPage = new SignupPage(Page);
             _accountCreatedPage = new AccountCreatedPage(Page);
             _accountDeletedPage = new AccountDeletedPage(Page);
+
             await Page.GotoAsync("/");
             await _homePage.AcceptCookiesIfPresent();
         }
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task UserCanRegisterSuccessfully()
         {
             var newUser = UserFactory.CreateDefault();
@@ -40,6 +43,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
+        [AllureTag("E2E")]
         public async Task NewlyRegisteredUserCanLoginSuccessfully()
         {
             var user = UserFactory.CreateDefault();
@@ -57,6 +61,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
+        [AllureTag("E2E")]
         public async Task UserCannotRegisterWithExistingEmail()
         {
             var user = UserFactory.CreateDefault();

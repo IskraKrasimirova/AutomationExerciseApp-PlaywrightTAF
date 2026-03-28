@@ -15,7 +15,7 @@ namespace AutomationApp.ApiTests.Tests
     [Category("ProductsApi")]
     public class ProductsTests : BaseTest
     {
-        private RestResponse<GetProductsResponse> _response;
+        private RestResponse<GetProductsResponse> _response = null!;
 
         [SetUp]
         public async Task TestSetUp()

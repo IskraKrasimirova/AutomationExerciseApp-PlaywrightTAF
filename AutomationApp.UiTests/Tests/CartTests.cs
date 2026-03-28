@@ -1,4 +1,5 @@
 ﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Pages;
 
 namespace AutomationApp.UiTests.Tests
@@ -7,11 +8,11 @@ namespace AutomationApp.UiTests.Tests
     [Category("Cart")]
     public class CartTests : BaseTest
     {
-        private HomePage _homePage;
-        private ProductsPage _productsPage;
-        private ProductDetailsPage _productDetailsPage;
-        private CartModal _cartModal;
-        private CartPage _cartPage;
+        private HomePage _homePage = null!;
+        private ProductsPage _productsPage = null!;
+        private ProductDetailsPage _productDetailsPage = null!;
+        private CartModal _cartModal = null!;
+        private CartPage _cartPage = null!;
 
         [SetUp]
         public async Task TestSetUp()
@@ -28,6 +29,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task AddTwoProductsToCart_ShowsCorrectProductDetails()
         {
             await _homePage.VerifyIsAtHomePage();

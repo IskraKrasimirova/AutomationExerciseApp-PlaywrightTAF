@@ -16,8 +16,8 @@ namespace AutomationApp.ApiTests.Tests
     [Category("LoginApi")]
     public class LoginTests : BaseTest
     {
-        private UserModel _testUser;
-        private UserApiHelper _userApiHelper;
+        private UserModel _testUser = null!;
+        private UserApiHelper _userApiHelper = null!;
 
         [OneTimeSetUp]
         public async Task CreateUser()

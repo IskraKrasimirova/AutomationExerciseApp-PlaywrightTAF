@@ -1,4 +1,5 @@
 ﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
 
@@ -8,18 +9,18 @@ namespace AutomationApp.UiTests.Tests
     [Category("Order")]
     public class OrderTests : BaseTest
     {
-        private HomePage _homePage;
-        private ProductsPage _productsPage;
-        private CartModal _cartModal;
-        private CartPage _cartPage;
-        private CheckoutModal _checkoutModal;
-        private LoginPage _loginPage;
-        private SignupPage _signupPage;
-        private AccountCreatedPage _accountCreatedPage;
-        private AccountDeletedPage _accountDeletedPage;
-        private CheckoutPage _checkoutPage;
-        private PaymentPage _paymentPage;
-        private OrderConfirmationPage _orderConfirmationPage;
+        private HomePage _homePage = null!;
+        private ProductsPage _productsPage = null!;
+        private CartModal _cartModal = null!;
+        private CartPage _cartPage = null!;
+        private CheckoutModal _checkoutModal = null!;
+        private LoginPage _loginPage = null!;
+        private SignupPage _signupPage = null!;
+        private AccountCreatedPage _accountCreatedPage = null!;
+        private AccountDeletedPage _accountDeletedPage = null!;
+        private CheckoutPage _checkoutPage = null!;
+        private PaymentPage _paymentPage = null!;
+        private OrderConfirmationPage _orderConfirmationPage = null!;
 
         [SetUp]
         public async Task TestSetUp()
@@ -43,6 +44,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
+        [AllureTag("E2E")]
         public async Task RegisterDuringCheckout_PlacesOrderSuccessfully()
         {
             // Add product to cart
@@ -103,6 +105,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("E2E")]
+        [AllureTag("E2E")]
         public async Task RegisterBeforeCheckout_PlacesOrderSuccessfully()
         {
             // Register

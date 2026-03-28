@@ -1,4 +1,5 @@
 ﻿using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models;
 using AutomationApp.UiTests.Pages;
 
@@ -8,9 +9,9 @@ namespace AutomationApp.UiTests.Tests
     [Category("Products")]
     public class ProductsTests: BaseTest
     {
-        private HomePage _homePage;
-        private ProductsPage _productsPage;
-        private ProductDetailsPage _productDetailsPage;
+        private HomePage _homePage = null!;
+        private ProductsPage _productsPage = null!;
+        private ProductDetailsPage _productDetailsPage = null!;
 
         [SetUp]
         public async Task TestSetUp()
@@ -25,6 +26,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task ViewProductDetails_ForTheFirstProduct_DisplaysCorrectDetails()
         {
             await _homePage.VerifyIsAtHomePage();
@@ -44,6 +46,7 @@ namespace AutomationApp.UiTests.Tests
 
         [Test]
         [Category("Smoke")]
+        [AllureTag("Smoke")]
         public async Task SearchProduct_WithValidSearchTerm_DisplaysSearchResults()
         {
             await _homePage.VerifyIsAtHomePage();
