@@ -2,6 +2,7 @@
 using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -25,18 +26,18 @@ namespace AutomationApp.UiTests.Tests
         [SetUp]
         public async Task TestSetUp()
         {
-            _homePage = new HomePage(Page);
-            _productsPage = new ProductsPage(Page);
-            _cartModal = new CartModal(Page);
-            _cartPage = new CartPage(Page);
-            _checkoutModal = new CheckoutModal(Page);
-            _loginPage = new LoginPage(Page);
-            _signupPage = new SignupPage(Page);
-            _accountCreatedPage = new AccountCreatedPage(Page);
-            _accountDeletedPage = new AccountDeletedPage(Page);
-            _checkoutPage = new CheckoutPage(Page);
-            _paymentPage = new PaymentPage(Page);
-            _orderConfirmationPage = new OrderConfirmationPage(Page);
+            _homePage = ServiceProvider.GetRequiredService<HomePage>();
+            _productsPage = ServiceProvider.GetRequiredService<ProductsPage>();
+            _cartModal = ServiceProvider.GetRequiredService<CartModal>();
+            _cartPage = ServiceProvider.GetRequiredService<CartPage>();
+            _checkoutModal = ServiceProvider.GetRequiredService<CheckoutModal>();
+            _loginPage = ServiceProvider.GetRequiredService<LoginPage>();
+            _signupPage = ServiceProvider.GetRequiredService<SignupPage>();
+            _accountCreatedPage = ServiceProvider.GetRequiredService<AccountCreatedPage>();
+            _accountDeletedPage = ServiceProvider.GetRequiredService<AccountDeletedPage>();
+            _checkoutPage = ServiceProvider.GetRequiredService<CheckoutPage>();
+            _paymentPage = ServiceProvider.GetRequiredService<PaymentPage>();
+            _orderConfirmationPage = ServiceProvider.GetRequiredService<OrderConfirmationPage>();
 
             await Page.GotoAsync("/");
             await _homePage.AcceptCookiesIfPresent();

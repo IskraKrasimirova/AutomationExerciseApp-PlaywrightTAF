@@ -1,15 +1,17 @@
 ﻿using AutomationApp.Common.Utilities;
 using AutomationApp.UiTests.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Playwright;
 
 namespace AutomationApp.UiTests.Tests
 {
     public class BaseTest
     {
-        protected IPage Page = null!;
         private IPlaywright _playwright = null!;
         private IBrowser _browser = null!;
         private string _browserName = UiConstants.BrowserChromium;
+        protected IPage Page = null!;
+        protected IServiceProvider ServiceProvider = null!;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
@@ -78,6 +80,9 @@ namespace AutomationApp.UiTests.Tests
 
             Page = await context.NewPageAsync();
 
+            var services = DependencyContainer.CreateServices(Page);
+            ServiceProvider = services.BuildServiceProvider();
+
             AllureSuiteHelper.ApplySuiteLabels();
         }
                 
@@ -85,6 +90,11 @@ namespace AutomationApp.UiTests.Tests
         public async Task TearDown()
         {
             await Page.Context.CloseAsync();
+
+            if (ServiceProvider is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
 
         [OneTimeTearDown]

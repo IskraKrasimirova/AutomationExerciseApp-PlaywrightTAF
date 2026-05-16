@@ -2,6 +2,7 @@
 using Allure.NUnit.Attributes;
 using AutomationApp.UiTests.Models.Factories;
 using AutomationApp.UiTests.Pages;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AutomationApp.UiTests.Tests
 {
@@ -15,8 +16,9 @@ namespace AutomationApp.UiTests.Tests
         [SetUp]
         public async Task TestSetUp()
         {
-            _homePage = new HomePage(Page);
-            _contactUsPage = new ContactUsPage(Page);
+            _homePage = ServiceProvider.GetRequiredService<HomePage>();
+            _contactUsPage = ServiceProvider.GetRequiredService<ContactUsPage>();
+
             await Page.GotoAsync("/");
             await _homePage.AcceptCookiesIfPresent();
             await _homePage.NavBar.GoToContactUsPage();
