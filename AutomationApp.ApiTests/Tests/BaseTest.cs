@@ -1,26 +1,33 @@
-﻿using AutomationApp.Common.Utilities;
+﻿using AutomationApp.ApiTests.Utilities;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using RestSharp;
-using RestSharp.Serializers.NewtonsoftJson;
 using System.Net;
 
 namespace AutomationApp.ApiTests.Tests
 {
     public class BaseTest
     {
-        protected RestClient Client;
+        protected IServiceProvider ServiceProvider = null!;
+        protected RestClient Client = null!;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var options = new RestClientOptions(ConfigurationSettings.Instance.SettingsModel.ApiBaseUrl);
-            Client = new RestClient(options, configureSerialization: s => s.UseNewtonsoftJson());
+            var services = DependencyContainer.RegisterDependencies();
+            ServiceProvider = services.BuildServiceProvider();
+            Client = ServiceProvider.GetRequiredService<RestClient>();
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
             Client.Dispose();
+
+            if (ServiceProvider is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
 
         protected void AssertStatusCode(RestResponse response, HttpStatusCode expectedStatusCode)

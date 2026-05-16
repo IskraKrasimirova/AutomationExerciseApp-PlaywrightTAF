@@ -5,6 +5,7 @@ using AutomationApp.ApiTests.Models;
 using AutomationApp.ApiTests.Models.Users;
 using AutomationApp.ApiTests.Utilities;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using RestSharp;
 using System.Net;
 
@@ -22,7 +23,7 @@ namespace AutomationApp.ApiTests.Tests
         [OneTimeSetUp]
         public async Task CreateUser()
         {
-            _userApiHelper = new UserApiHelper(Client);
+            _userApiHelper = ServiceProvider.GetRequiredService<UserApiHelper>();
             _testUser = await _userApiHelper.CreateUserAsync();
         }
 
