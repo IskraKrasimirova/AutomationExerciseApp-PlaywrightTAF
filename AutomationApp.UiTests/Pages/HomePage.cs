@@ -6,8 +6,8 @@ namespace AutomationApp.UiTests.Pages
 {
     public class HomePage: BasePage
     {
-        private ILocator LogoImage => _page.GetByAltText("Website for automation practice");
-        private ILocator Header => _page.Locator("#slider-carousel .item.active h2");
+        private ILocator LogoImage => _page.GetByRole(AriaRole.Link, new() { Name = "Home" });
+        private ILocator Header => _page.Locator(".item.active h1");
         private ILocator ConsentButton => _page.GetByRole(AriaRole.Button, new() { Name = "Consent" });
 
         public HomePage(IPage page) : base(page) 
@@ -26,7 +26,7 @@ namespace AutomationApp.UiTests.Pages
         {
             await Expect(_page).ToHaveURLAsync(ConfigurationSettings.Instance.SettingsModel.BaseUrl);
             await Expect(LogoImage).ToBeVisibleAsync();
-            await Expect(Header).ToContainTextAsync("Full-Fledged practice website for Automation Engineers");
+            await Expect(Header).ToContainTextAsync("AutomationExercise");
         }
     }
 }

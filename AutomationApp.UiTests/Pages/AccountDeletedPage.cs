@@ -8,7 +8,7 @@ namespace AutomationApp.UiTests.Pages
     {
         private ILocator AccountDeletedHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Account Deleted!" });
         private ILocator DeletingMessage => _page.GetByText("Your account has been permanently deleted!");
-        private ILocator ContinueButton => _page.Locator("[data-qa='continue-button']");
+        private ILocator ContinueButton => _page.GetByRole(AriaRole.Link, new() { Name = "Continue" });
 
         public AccountDeletedPage(IPage page) : base(page)
         {

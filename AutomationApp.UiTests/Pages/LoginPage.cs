@@ -8,14 +8,14 @@ namespace AutomationApp.UiTests.Pages
     {
         private ILocator LoginForm => _page.Locator(".login-form");
         private ILocator LoginHeader => LoginForm.GetByRole(AriaRole.Heading, new() { Name = "Login to your account" });
-        private ILocator EmailInput => LoginForm.GetByPlaceholder("Email Address");
-        private ILocator PasswordInput => LoginForm.GetByPlaceholder("Password");
+        private ILocator EmailInput => LoginForm.GetByRole(AriaRole.Textbox, new() { Name = "Email Address" });
+        private ILocator PasswordInput => LoginForm.GetByRole(AriaRole.Textbox, new() { Name = "Password" }); 
         private ILocator LoginButton => LoginForm.GetByRole(AriaRole.Button, new() { Name = "Login" });
 
         private ILocator SignupForm => _page.Locator(".signup-form");
         private ILocator SignupHeader => SignupForm.GetByRole(AriaRole.Heading, new() { Name = "New User Signup!" });
-        private ILocator NameInput => SignupForm.GetByPlaceholder("Name");
-        private ILocator SignupEmailInput => SignupForm.GetByPlaceholder("Email Address");
+        private ILocator NameInput => SignupForm.GetByRole(AriaRole.Textbox, new() { Name = "Name" });
+        private ILocator SignupEmailInput => SignupForm.GetByRole(AriaRole.Textbox, new() { Name = "Email Address" });
         private ILocator SignupButton => SignupForm.GetByRole(AriaRole.Button, new() { Name = "Signup" });
         private ILocator ExistingEmailErrorMessage => SignupForm.GetByText("Email Address already exist!");
         private ILocator InvalidCredentialsErrorMessage => LoginForm.GetByText("Your email or password is incorrect!");
@@ -33,7 +33,7 @@ namespace AutomationApp.UiTests.Pages
 
         public async Task Signup(string name, string email)
         {
-            await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+            //await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await NameInput.FillAsync(name);
             await SignupEmailInput.FillAsync(email);
             await SignupButton.ClickAsync();

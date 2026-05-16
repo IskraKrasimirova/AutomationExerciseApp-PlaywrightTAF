@@ -7,8 +7,8 @@ namespace AutomationApp.UiTests.Pages
     public class AccountCreatedPage : BasePage
     {
         private ILocator AccountCreatedHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Account Created!" });
-        private ILocator GreetingMessage => _page.GetByText("Congratulations! Your new account has been successfully created!");
-        private ILocator ContinueButton => _page.Locator("[data-qa='continue-button']");
+        private ILocator GreetingMessage => _page.GetByText("Congratulations! Your new account");
+        private ILocator ContinueButton => _page.GetByRole(AriaRole.Link, new() { Name = "Continue" });
 
         public AccountCreatedPage(IPage page) : base(page)
         {
