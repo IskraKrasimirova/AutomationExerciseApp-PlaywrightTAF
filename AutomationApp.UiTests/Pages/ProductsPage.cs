@@ -10,7 +10,7 @@ namespace AutomationApp.UiTests.Pages
         private ILocator AllProductsHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "All Products" });
         private ILocator ProductsList => _page.Locator(".features_items");
         
-        private ILocator SearchProductInput => _page.GetByPlaceholder("Search Product");
+        private ILocator SearchProductInput => _page.GetByRole(AriaRole.Textbox, new() { Name = "Search Product" });
         private ILocator SearchButton => _page.Locator("#submit_search");
         private ILocator CategoryHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Category" });
         private ILocator BrandsHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Brands" });

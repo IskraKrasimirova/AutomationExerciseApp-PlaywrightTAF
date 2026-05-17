@@ -21,9 +21,9 @@ namespace AutomationApp.UiTests.Pages
 
         private ILocator WriteYourReviewTab => _page.GetByRole(AriaRole.Link, new() { Name = "Write Your Review" });
         private ILocator ReviewForm => _page.Locator("#review-form");
-        private ILocator ReviewNameInput => ReviewForm.GetByPlaceholder("Your Name");
-        private ILocator ReviewEmailInput => ReviewForm.GetByPlaceholder("Email Address");
-        private ILocator ReviewTextInput => ReviewForm.GetByPlaceholder("Add Review Here!");
+        private ILocator ReviewNameInput => ReviewForm.GetByRole(AriaRole.Textbox, new() { Name = "Your Name" });
+        private ILocator ReviewEmailInput => ReviewForm.GetByRole(AriaRole.Textbox, new() { Name = "Email Address" });
+        private ILocator ReviewTextInput => ReviewForm.GetByRole(AriaRole.Textbox, new() { Name = "Add Review Here!" });
         private ILocator SubmitReviewButton => ReviewForm.GetByRole(AriaRole.Button, new() { Name = "Submit" });
 
         public ProductDetailsPage(IPage page) : base(page)

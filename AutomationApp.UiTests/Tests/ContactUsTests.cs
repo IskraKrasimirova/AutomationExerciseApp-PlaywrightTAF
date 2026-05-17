@@ -35,7 +35,7 @@ namespace AutomationApp.UiTests.Tests
 
             await _contactUsPage.SubmitContactForm(contactData);
             await _contactUsPage.VerifySuccessMessage();
-            await _contactUsPage.GoToHomePge();
+            await _contactUsPage.GoToHomePage();
             await _homePage.VerifyIsAtHomePage();
         }
 
@@ -48,7 +48,7 @@ namespace AutomationApp.UiTests.Tests
 
             await _contactUsPage.SubmitContactForm(contactData);
             await _contactUsPage.VerifySuccessMessage();
-            await _contactUsPage.GoToHomePge();
+            await _contactUsPage.GoToHomePage();
             await _homePage.VerifyIsAtHomePage();
         }
     }

@@ -12,12 +12,12 @@ namespace AutomationApp.UiTests.Pages
         private ILocator GetInTouchHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "GET IN TOUCH" });
         private ILocator FeedbackHeader => _page.GetByRole(AriaRole.Heading, new() { Name = "Feedback For Us" });
 
-        private ILocator NameInput => ContactUsForm.GetByPlaceholder("Name");
-        private ILocator EmailInput => ContactUsForm.GetByPlaceholder("Email");
-        private ILocator SubjectInput => ContactUsForm.GetByPlaceholder("Subject");
-        private ILocator MessageInput => ContactUsForm.GetByPlaceholder("Your Message Here");
+        private ILocator NameInput => ContactUsForm.GetByRole(AriaRole.Textbox, new() { Name = "Name" });
+        private ILocator EmailInput => ContactUsForm.GetByRole(AriaRole.Textbox, new() { Name = "Email" });
+        private ILocator SubjectInput => ContactUsForm.GetByRole(AriaRole.Textbox, new() { Name = "Subject" });
+        private ILocator MessageInput => ContactUsForm.GetByRole(AriaRole.Textbox, new() { Name = "Your Message Here" });
         private ILocator FileUploadInput => ContactUsForm.Locator("input[type='file']");
-        private ILocator SubmitButton => ContactUsForm.GetByText("Submit");
+        private ILocator SubmitButton => ContactUsForm.Locator("[data-qa='submit-button']");
         private ILocator SuccessMessage => _page.Locator(".contact-form").GetByText("Success! Your details have been submitted successfully.");
         private ILocator HomeButton => _page.Locator("#form-section").GetByRole(AriaRole.Link, new() { Name = "Home" });
 
@@ -30,7 +30,7 @@ namespace AutomationApp.UiTests.Pages
             _page.Dialog += async (_, dialog) => await dialog.AcceptAsync();
 
             await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
-            await NameInput.WaitForAsync();
+            //await NameInput.WaitForAsync();
             await NameInput.FillAsync(form.Name);
             await EmailInput.FillAsync(form.Email);
             await SubjectInput.FillAsync(form.Subject);
@@ -44,7 +44,7 @@ namespace AutomationApp.UiTests.Pages
             await SubmitButton.ClickAsync();
         }
 
-        public async Task GoToHomePge()
+        public async Task GoToHomePage()
         {
             await HomeButton.ClickAsync();
         }
