@@ -40,6 +40,7 @@ namespace AutomationApp.UiTests.Utilities
             services.AddScoped<CategoryProductsPage>();
             services.AddScoped<CheckoutModal>();
             services.AddScoped<CheckoutPage>();
+            services.AddScoped<ContactUsPage>();
             services.AddScoped<OrderConfirmationPage>();
             services.AddScoped<PaymentPage>();
             services.AddScoped<ProductDetailsPage>();
