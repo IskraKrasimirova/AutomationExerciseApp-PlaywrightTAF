@@ -149,14 +149,12 @@ namespace AutomationApp.ApiTests.Tests
             await _userApiHelper.DeleteUserAsync(newUser.Email, newUser.Password);
         }
 
-        [Test, Ignore("deleteAccount endpoint does not work outside Postman.")]
+        [Test, Ignore("deleteAccount endpoint does not work outside Postman/Playwright.")]
         public async Task DeleteAccount_WithValidCredentials_ReturnsAccountDeleted()
         {
             var userToDelete = await _userApiHelper.CreateUserAsync();
 
-            var request = new RestRequest(ApiConstants.DeleteAccountEndpoint, Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddParameter("_method", "DELETE");
+            var request = new RestRequest(ApiConstants.DeleteAccountEndpoint, Method.Delete);
             request.AddParameter("email", userToDelete.Email);
             request.AddParameter("password", userToDelete.Password);
 

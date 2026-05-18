@@ -30,7 +30,7 @@ namespace AutomationApp.UiTests.Pages
             _page.Dialog += async (_, dialog) => await dialog.AcceptAsync();
 
             await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
-            //await NameInput.WaitForAsync();
+
             await NameInput.FillAsync(form.Name);
             await EmailInput.FillAsync(form.Email);
             await SubjectInput.FillAsync(form.Subject);
