@@ -93,6 +93,7 @@ Tests are based on the test cases defined on the AutomationExercise website, wit
 - **Base Page / Base Test** — shared setup and teardown logic
 - **Factory Pattern** — test data generation using Bogus
 - **Reusable Components** — `NavBar` and `Sidebar` are shared across pages
+- **Dependency Injection** — both UI and API layers use DI containers to register configuration, API clients, helpers, Playwright IPage, and all Page Objects.
 
 ---
 

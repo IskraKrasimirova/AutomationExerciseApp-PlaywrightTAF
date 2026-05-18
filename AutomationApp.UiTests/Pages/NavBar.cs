@@ -14,7 +14,7 @@ namespace AutomationApp.UiTests.Pages
 
         private ILocator HomeLink => _page.GetByRole(AriaRole.Link, new() { Name = "Home" });
         private ILocator ProductsLink => _page.GetByRole(AriaRole.Link, new() { Name = "Products" });
-        private ILocator CartLink => _page.GetByRole(AriaRole.Link, new() { Name = "Cart" });
+        private ILocator CartLink => _page.GetByRole(AriaRole.Link, new() { Name = "Cart", Exact = true });
         private ILocator LoginLink => _page.GetByRole(AriaRole.Link, new() { Name = "Signup / Login" });
         private ILocator TestCasesLink => _page.GetByRole(AriaRole.Link, new() { Name = "Test Cases" });
         private ILocator ApiTestingLink => _page.GetByRole(AriaRole.Link, new() { Name = "API Testing" });
